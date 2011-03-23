@@ -9,11 +9,20 @@ nav .pane {
     padding:10px;
 }
 </style>
+<script type="text/javascript" src="jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="margin-tonic.js"></script>
+<script type="text/javascript">
+$(function() {
+    mt = $('#tome').MarginTonic();
+    mt.busy(false);
+    mt.loadBook();
+});
+</script>
 </head>
 <body>
 <div id="container">
     <header>
-        <img src="http://i.imgur.com/plAIE.png" />
+        <img id="spinner" src="spinner.png" />
     </header>
     <nav>
         <div id="actions-selector"></div>
@@ -22,11 +31,7 @@ nav .pane {
         <div id="dictionary" class="pane"></div>
         <div id="library" class="pane"></div>
     </nav>
-    <article>
-        <section>Call me Ishmael</section>
-            <aside><header>Joe Frambach</header><time pubdate datetime="2009-10-09T14:28-08:00"></time>Don&quot;t call me Shirley</aside>
-        <section>Blah blah blah</section>
-        <section>Whales</section>
+    <article id="tome">
     </article>
 </div>
 </body>
