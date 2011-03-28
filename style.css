@@ -50,12 +50,13 @@ article {
 	overflow: auto;
 	color: #222222;
 	font-family:'ArvoRegular', serif;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 22px;
 }
 
 article section {
 	margin: 10px 0;
+	text-indent: 4em;
 	clear: both;
 }
 
