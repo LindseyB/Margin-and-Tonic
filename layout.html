@@ -14,20 +14,28 @@
         </script>
     </head>
 <body>
-<div id="container">
     <header id="top-bar">
         <img id="spinner" src="spinner.png" alt=""/> p. 5/232
     </header>
-    <nav>
-        <div id="actions-selector"></div>
-        <div id="tools" class="pane"><img src="images/tools.png" alt=""/><img src="images/tools_text_black.png" alt="tools"/></div>
-        <div id="comments" class="pane"><img src="images/comments.png" alt=""/><img src="images/comments_text_black.png" alt="comments"/></div>
-        <div id="dictionary" class="pane"><img src="images/dictionary.png" alt=""/><img src="images/dictionary_text_black.png" alt="dictionary"/></div>
-        <div id="library" class="pane"><img src="images/library.png" alt=""/><img src="images/library_text_black.png" alt="library"/></div>
+    <nav id="actions">
+        <div class="tools"><img src="images/tools.png" alt=""/><img src="images/tools_text_black.png" alt="tools"/></div>
+        <div class="comments"><img src="images/comments.png" alt=""/><img src="images/comments_text_black.png" alt="comments"/></div>
+        <div class="dictionary active"><img src="images/dictionary.png" alt=""/><img src="images/dictionary_text_black.png" alt="dictionary"/></div>
+        <div class="library"><img src="images/library.png" alt=""/><img src="images/library_text_black.png" alt="library"/></div>
+    </nav>
+    <nav id="panes">
+        <div class="tools"></div>
+        <div class="comments"></div>
+        <div class="dictionary active">
+            <form method="get" action="http://google.com/search" target="_blank">
+            <input type="text" name="q" />
+            <input type="submit" value="Lookup" />
+            </form>
+        </div>
+        <div class="library"></div>
     </nav>
     <article id="tome">
 
     </article>
-</div>
 </body>
 </html>
