@@ -15,23 +15,32 @@ $.fn.MarginTonic = function(options) {
         } else {
             $(opts.spinner).hide();
         }
+    };
+    
+    this.prepare = function(filename, text) {
+        var filetype = filename.split('.').pop(); // regex would be faster but this is cleaner
+        switch (filename) {
+        case 'txt': return '<pre>'+text+'</pre>';
+        case 'mtbook': return $(text);
+        }
+        return text;
     }
     
     this.loadBook = function() {
-        var busy = this.busy;
-        busy(true);
+        var $this = this;
+        $this.busy(true);
         $.get(opts.filename, function(data) {
-            $(opts.tome).html($(data).html());
-            busy(false);
+            $(opts.tome).html($this.prepare(opts.filename,data));
+            $this.busy(false);
         }, 'html');
-    }
+    };
     
     return this;
 };
 
 // public
 $.fn.MarginTonic.defaults = {
-    filename: 'moby_dick.mtbook',
+    filename: 'moby_dick.txt',
     tome: '#tome',
     spinner: '#spinner'
 };
