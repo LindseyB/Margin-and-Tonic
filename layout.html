@@ -27,10 +27,19 @@
         <div class="tools"></div>
         <div class="comments"></div>
         <div class="dictionary active">
-            <form method="get" action="http://google.com/search" target="_blank">
-            <input type="text" name="q" />
-            <input type="submit" value="Lookup" />
-            </form>
+            <h2>Dictionary</h2>
+            <input type="text" />
+            <article></article>
+            <script type="text/javascript">
+            $(function(){
+                $('div.dictionary :text').change(function(){
+                    $.get('dictionary/'+$('div.dictionary :text').val(),
+                    function(data) {
+                        $('div.dictionary article').html($(data).find('ul.std, .spell'));
+                    });
+                });
+            });
+            </script>
         </div>
         <div class="library"></div>
     </nav>

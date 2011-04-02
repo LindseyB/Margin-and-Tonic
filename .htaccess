@@ -1,0 +1,3 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteRule ^dictionary/([^/]+)/?$ dictionary.php?q=$1 [NC]

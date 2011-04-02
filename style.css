@@ -1,8 +1,8 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	height: 1024px;
-	width: 600px;
+	height: 100%;
+	width: 100%;
 }
 
 header#top-bar {
