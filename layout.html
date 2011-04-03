@@ -20,28 +20,37 @@
     <nav id="actions">
         <div class="tools"><img src="images/tools.png" alt=""/><img src="images/tools_text_black.png" alt="tools"/></div>
         <div class="comments"><img src="images/comments.png" alt=""/><img src="images/comments_text_black.png" alt="comments"/></div>
-        <div class="dictionary active"><img src="images/dictionary.png" alt=""/><img src="images/dictionary_text_black.png" alt="dictionary"/></div>
-        <div class="library"><img src="images/library.png" alt=""/><img src="images/library_text_black.png" alt="library"/></div>
+        <div class="dictionary"><img src="images/dictionary.png" alt=""/><img src="images/dictionary_text_black.png" alt="dictionary"/></div>
+        <div class="library active"><img src="images/library.png" alt=""/><img src="images/library_text_black.png" alt="library"/></div>
     </nav>
     <nav id="panes">
         <div class="tools"></div>
         <div class="comments"></div>
-        <div class="dictionary active">
+        <div class="dictionary">
             <h2>Dictionary</h2>
             <input type="text" />
             <article></article>
-            <script type="text/javascript">
-            $(function(){
-                $('div.dictionary :text').change(function(){
-                    $.get('dictionary/'+$('div.dictionary :text').val(),
-                    function(data) {
-                        $('div.dictionary article').html($(data).find('ul.std, .spell'));
-                    });
-                });
-            });
-            </script>
         </div>
-        <div class="library"></div>
+        <div class="library active">
+            <h2>Library</h2>
+            <h3>Recently Read</h3>
+            <ul>
+                <li><a href="#mobydick">Moby Dick</a></li>
+                <li><a href="#23966">The Song my Paddle Sings</a></li>
+                <li><a href="#27827">The Kama Stura of Vatsyayana</a></li>
+                <li><a href="#76">Adventures of Huckleberry Finn</a></li>
+                <li><a href="#1661">The Adventures of Sherlock Holmes</a></li>
+                <li><a href="#1342">Pride and Prejudice</a></li>
+                <li><a href="#30601">How to Analyze People on Sight</a></li>
+            </ul>
+            <h3>Recommended</h3>
+            <ul>
+                <li><a href="#11">Alice's Adventures in Wonderland</a></li>
+                <li><a href="#174">The Picture of Dorian Gray</a></li>
+                <li><a href="#132">The Art of War</a></li>
+                <li><a href="#5000">The Notebooks of Leonardo Da Vinci</a></li>
+            </ul>
+        </div>
     </nav>
     <article id="tome">
 

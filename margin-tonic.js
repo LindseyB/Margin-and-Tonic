@@ -42,8 +42,33 @@ $.fn.MarginTonic = function(options) {
 $.fn.MarginTonic.defaults = {
     filename: 'moby_dick.txt',
     tome: '#tome',
-    spinner: '#spinner'
+    spinner: '#spinner',
+    dictionary: 'nav#panes div.dictionary'
 };
 
 // (end of private closure)
 })(jQuery);
+
+$(function() {
+    // Nav Actions
+    $('nav#actions div').click(function() {
+        if ($(this).hasClass('active')) return;
+        $('nav#actions div.active').removeClass('active');
+        $('nav#panes div.active').removeClass('active');
+        $('nav#panes div.'+$(this).attr('class')).addClass('active');
+        $(this).addClass('active');
+    })
+    
+    
+    // Dictionary
+    var $dictionary = $($.fn.MarginTonic.defaults.dictionary);
+    $($dictionary).find(':text').change(function(){
+        $.get('dictionary/'+$dictionary.find(':text').val(),
+        function(data) {
+            $($dictionary).find('article').html($(data).find('ul.std, .spell'));
+        });
+    });
+    
+    
+    
+})
