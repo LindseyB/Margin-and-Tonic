@@ -5,70 +5,82 @@
 // (closure to keep private functions private)
 (function($) {
 
-$.fn.MarginTonic = function(options) {
-    var opts = $.extend({}, $.fn.MarginTonic.defaults, options);
+function MarginTonic (options) {
+    var _this = this;
     
-    // instance method
-    this.busy = function(is_busy) {
-        if (is_busy) {
-            $(opts.spinner).show();
-        } else {
-            $(opts.spinner).hide();
-        }
+    _this.options = {
+        filename: 'boo.txt',
+        article: '#article',
+        nav: '#nav',
+        pane: '#pane',
+        header: '#header',
+        spinner: '#spinner',
+        panes: ['tools','comments','dictionary','library']
     };
     
-    this.prepare = function(filename, text) {
-        var filetype = filename.split('.').pop(); // regex would be faster but this is cleaner
-        switch (filename) {
-        case 'txt': return '<pre>'+text+'</pre>';
+    for (i in options) {
+        _this.options[i] = options[i];
+    }
+    
+    _this.nav = $(_this.options.nav);
+    _this.article = $(_this.options.article);
+    _this.pane = $(_this.options.pane);
+    _this.header = $(_this.options.header);
+    _this.spinner = $(_this.options.spinner);
+    
+    _this.article.parent().iscroll({bounce:false});
+    
+    // Create tabs and panes, load pane contents
+    for (var i in _this.options.panes) {
+        var pane = _this.options.panes[i];
+        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt=""/><img src="images/'+pane+'_text_black.png" alt="'+pane+'"/></div>'));
+    }
+
+    // Nav Actions
+    _this.nav.children().click(function() {
+        if ($(this).hasClass('active')) return;
+        _this.pane.hide().slideDown();
+        _this.nav.children().removeClass('active');
+        _this.pane.load('pane/'+$(this).attr('class'));
+        $(this).addClass('active');
+    });
+};
+
+MarginTonic.prototype = {
+    
+    // Private
+    
+    // Public
+    busy: function(is_busy) {
+        var _this = this;
+        if (is_busy) {
+            _this.spinner.show();
+        } else {
+            _this.spinner.hide();
+        }
+    },
+    
+    prepare: function(filename, text) {
+        var filetype = filename.split('.').pop().toLowerCase(); // regex would be faster but this is cleaner
+        switch (filetype) {
+        case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
         case 'mtbook': return $(text);
         }
         return text;
-    }
+    },
     
-    this.loadBook = function() {
-        var $this = this;
-        $this.busy(true);
-        $.get(opts.filename, function(data) {
-            $(opts.tome).html($this.prepare(opts.filename,data));
-            $this.busy(false);
+    loadBook: function() {
+        var _this = this;
+        _this.busy(true);
+        $.get(_this.options.filename, function(data) {
+            _this.article.html(_this.prepare(_this.options.filename,data));
+            _this.busy(false);
         }, 'html');
-    };
-    
-    return this;
+    }
 };
 
-// public
-$.fn.MarginTonic.defaults = {
-    filename: 'moby_dick.txt',
-    tome: '#tome',
-    spinner: '#spinner',
-    dictionary: 'nav#panes div.dictionary'
-};
+if (typeof exports !== 'undefined') exports.MarginTonic = MarginTonic;
+else window.MarginTonic = MarginTonic;
 
 // (end of private closure)
 })(jQuery);
-
-$(function() {
-    // Nav Actions
-    $('nav#actions div').click(function() {
-        if ($(this).hasClass('active')) return;
-        $('nav#actions div.active').removeClass('active');
-        $('nav#panes div.active').removeClass('active');
-        $('nav#panes div.'+$(this).attr('class')).addClass('active');
-        $(this).addClass('active');
-    })
-    
-    
-    // Dictionary
-    var $dictionary = $($.fn.MarginTonic.defaults.dictionary);
-    $($dictionary).find(':text').change(function(){
-        $.get('dictionary/'+$dictionary.find(':text').val(),
-        function(data) {
-            $($dictionary).find('article').html($(data).find('ul.std, .spell'));
-        });
-    });
-    
-    
-    
-})

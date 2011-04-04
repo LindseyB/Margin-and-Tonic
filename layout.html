@@ -1,61 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Margin and Tonic: Comments in the margins of your favorite books</title>
+        <title>Margin Tonic: Comments in the margins of your favorite books</title>
         <link type="text/css" href="css/smoothness/jquery-ui-1.8.11.custom.css" rel="Stylesheet" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />	
         <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+        <script type="text/javascript" src="js/iscroll-min.js"></script>
+        <script type="text/javascript" src="js/iscroll-wrapper.js"></script>
         <script type="text/javascript" src="js/margin-tonic.js"></script>
         <script type="text/javascript">
         $(function() {
-            mt = $('#tome').MarginTonic();
-            mt.busy(false);
-            mt.loadBook();
+            $.margin_tonic = new MarginTonic();
+            $.margin_tonic.busy(false);
+            $.margin_tonic.loadBook();
         });
         </script>
     </head>
 <body>
-    <header id="top-bar">
+<div id="wrapper">
+    <div id="header">
         <img id="spinner" src="spinner.png" alt=""/> p. 5/232
-    </header>
-    <nav id="actions">
-        <div class="tools"><img src="images/tools.png" alt=""/><img src="images/tools_text_black.png" alt="tools"/></div>
-        <div class="comments"><img src="images/comments.png" alt=""/><img src="images/comments_text_black.png" alt="comments"/></div>
-        <div class="dictionary"><img src="images/dictionary.png" alt=""/><img src="images/dictionary_text_black.png" alt="dictionary"/></div>
-        <div class="library active"><img src="images/library.png" alt=""/><img src="images/library_text_black.png" alt="library"/></div>
-    </nav>
-    <nav id="panes">
-        <div class="tools"></div>
-        <div class="comments"></div>
-        <div class="dictionary">
-            <h2>Dictionary</h2>
-            <input type="text" />
-            <article></article>
-        </div>
-        <div class="library active">
-            <h2>Library</h2>
-            <h3>Recently Read</h3>
-            <ul>
-                <li><a href="#mobydick">Moby Dick</a></li>
-                <li><a href="#23966">The Song my Paddle Sings</a></li>
-                <li><a href="#27827">The Kama Stura of Vatsyayana</a></li>
-                <li><a href="#76">Adventures of Huckleberry Finn</a></li>
-                <li><a href="#1661">The Adventures of Sherlock Holmes</a></li>
-                <li><a href="#1342">Pride and Prejudice</a></li>
-                <li><a href="#30601">How to Analyze People on Sight</a></li>
-            </ul>
-            <h3>Recommended</h3>
-            <ul>
-                <li><a href="#11">Alice's Adventures in Wonderland</a></li>
-                <li><a href="#174">The Picture of Dorian Gray</a></li>
-                <li><a href="#132">The Art of War</a></li>
-                <li><a href="#5000">The Notebooks of Leonardo Da Vinci</a></li>
-            </ul>
-        </div>
-    </nav>
-    <article id="tome">
-
-    </article>
+    </div>
+    <div id="nav"></div>
+    <div id="pane"></div>
+    <div id="article_scroll" class="scrollable"><div id="article"></div></div>
+</div>
 </body>
 </html>
