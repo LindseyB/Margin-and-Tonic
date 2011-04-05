@@ -20,6 +20,11 @@ html, body {
     position: absolute;
 }
 
+#article_scroll #article pre {
+	font-family: 'ArvoRegular', serif;
+	margin-left: 10px;
+}
+
 #header {
 	padding-right: 5px;
 	background-color: #CCCCCC;
@@ -55,6 +60,11 @@ html, body {
     background-color: #ddeedd;
 }
 
+#article div.comment p {
+	margin: 2px;
+	font-size: 12px;
+}
+
 #article > section aside {
 	background-color: #FFFFFF;
 	border-radius: 1em;
@@ -82,21 +92,21 @@ html, body {
     background-color: #ddeedd;
 }
 
-#nav .tools { background-color: #6666AA; }
+#nav .tools { background-color: #8DB6CD; }
 #nav .tools:hover,
-#nav .tools.active { background-color: #9999FF; }
+#nav .tools.active { background-color: #607B8B; }
 
-#nav .comments { background-color: #88AA22; }
+#nav .comments { background-color: #B4CDCD; }
 #nav .comments:hover,
-#nav .comments.active { background-color: #CCFF33; }
+#nav .comments.active { background-color: #7A8B8B; }
 
-#nav .dictionary { background-color: #AA6644; }
+#nav .dictionary { background-color: #B4CDCD; }
 #nav .dictionary:hover,
-#nav .dictionary.active { background-color: #FF9966; }
+#nav .dictionary.active { background-color: #7A8B8B; }
 
-#nav .library { background-color: #44AAAA; }
+#nav .library { background-color: #8DB6CD; }
 #nav .library:hover,
-#nav .library.active { background-color: #66FFFF; }
+#nav .library.active { background-color: #607B8B; }
 
 /* FONTS */
 
