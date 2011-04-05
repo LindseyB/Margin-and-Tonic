@@ -28,7 +28,50 @@ function MarginTonic (options) {
     _this.header = $(_this.options.header);
     _this.spinner = $(_this.options.spinner);
     
-    _this.article.parent().iscroll({bounce:false});
+    _this.article_iscroll = new iScroll(_this.article.parent().get(0),{
+        bounce:false,
+        dblclick:function() {
+        
+            function getSelected() {
+                if(window.getSelection) { return window.getSelection().toString(); }
+                else if(document.getSelection) { return document.getSelection().toString(); }
+                else {
+                    var selection = document.selection && document.selection.createRange();
+                    if(selection.text) { return selection.text; }
+                }
+                return "";
+            }
+
+            function clearSelection() {
+                if (window.getSelection) {
+                   window.getSelection().removeAllRanges();
+                } else if (document.selection) {
+                   document.selection.empty();
+                }
+            }
+        
+            _this.dictword = getSelected();
+            clearSelection();
+            
+            _this.nav.find(".active").click();
+            _this.nav.find(".dictionary").click();
+            return false;
+        }
+    });
+    
+    setTimeout(function() {
+        _this.article_iscroll.refresh();
+    }, 100);
+    
+    _this.article.mousedown(function(e) {
+        $(this).data({x:e.pageX, y:e.pageY});
+    })
+    .mouseup(function(e) {
+        if ($(this).data('x') != e.pageX || $(this).data('y') != e.pageY) {
+            return;
+        }
+        
+    });
     
     // Create tabs and panes, load pane contents
     for (var i in _this.options.panes) {
@@ -41,7 +84,6 @@ function MarginTonic (options) {
         var name = $(this).data('name');
             
         if (_this.nav.current == name) {
-            console.log('hiding');
             _this.pane.animate({left:-_this.pane.width()});
             _this.nav.current = null;
             $(this).removeClass('active');

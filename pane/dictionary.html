@@ -5,16 +5,20 @@
 <script type="text/javascript">
 $(function() {
     var mt = $.margin_tonic;
-    mt.pane.iscroll = mt.pane.find('.scrollable').iscroll({bounce:false});
+    mt.pane_iscroll = new iScroll(mt.pane.find('.scrollable').get(0),{bounce:false});
     mt.pane.find(':text').change(function(){
         $.get('dictionary/'+mt.pane.find(':text').val(),
         function(data) {
             mt.pane.find('.article').empty().append($(data).find('ul.std, .spell'));
             setTimeout(function() {
-                console.log(mt.pane.iscroll);
-                mt.pane.iscroll.refresh();
+                mt.pane_iscroll.refresh();
             }, 200);
         });
     });
+    
+    if (mt.dictword) {
+        mt.pane.find(':text').val(mt.dictword).change();
+        mt.dictword = null;
+    }
 });
 </script>
