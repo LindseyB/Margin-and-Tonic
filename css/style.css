@@ -36,6 +36,25 @@ html, body {
 	padding: 5px;
 	background-color: #ddeedd;
     z-index: 2;
+    font-family: Helvetica, Arial, freesans, sans-serif;
+    overflow: hidden;
+}
+
+#pane ul li {
+	margin-bottom: 5px;
+}
+
+a {
+	color: #666666;
+	text-decoration: none;
+}
+
+#pane h3 {
+	margin: 10px 0px;
+}
+
+#pane input {
+	width: 120px;
 }
 
 #article_scroll {
