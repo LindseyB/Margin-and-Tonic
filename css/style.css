@@ -1,100 +1,46 @@
-html, body {
+/* LAYOUT */
+
+html * {
 	margin: 0;
 	padding: 0;
-	height: 100%;
-	width: 100%;
 }
 
-header#top-bar {
+html, body {
+	height: 100%;
+	width: 100%;
+    overflow: hidden;
+}
+
+#wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+#pane, #article_scroll, #nav {
+    position: absolute;
+}
+
+#header {
+	padding-right: 5px;
 	background-color: #CCCCCC;
 	text-align: right;
 	font-family: "Arial Black", Helvetica, Arial, freesans, sans-serif;
-	padding-right: 5px;
 }
 
-/* Navigation */
-
-nav#actions {
-	width: 20px;
-	height: 100%;
-	float: left;
+#pane {
+	padding: 5px;
+	background-color: #ddeedd;
+    z-index: 2;
 }
 
-nav#actions div {
-	padding-top: 5px;
-	width: 20px;
-	height: 25%;
-	text-align: center;
-	border-right: 2px solid #77886E;
+#article_scroll {
+    z-index: 1;
 }
 
-nav#actions div.active {
-	border-right: 0;
-}
-
-nav#actions .tools {
-	background-color: #6666AA;
-}
-
-nav#actions .tools:hover,
-nav#actions .tools.active{
-	background-color: #9999FF;
-}
-
-nav#actions .comments {
-	background-color: #88AA22;
-}
-
-nav#actions .comments:hover,
-nav#actions .comments.active {
-	background-color: #CCFF33;
-}
-
-nav#actions .dictionary {
-	background-color: #AA6644;
-}
-
-nav#actions .dictionary:hover,
-nav#actions .dictionary.active {
-	background-color: #FF9966;
-}
-
-nav#actions .library {
-	background-color: #44AAAA;
-}
-
-nav#actions .library:hover,
-nav#actions .library.active {
-	background-color: #66FFFF;
-}
-
-/* Panes */
-
-nav#panes {
-	height: 100%;
-	width: 200px;
-	float: left;
-}
-
-nav#panes div {
-	height: 100%;
-	padding: 1em;
-	overflow:auto;
-	display:none;
-	border-right: 2px solid #77886E;
-}
-
-nav#panes div.active {
-	display:block;
-}
-
-/* Main Article */
-
-article {
-	height: 100%;
+#article {
+    position:relative;
+	padding: 5px;
 	background-color: #efefef;
-	padding: 1em;
-	overflow: auto;
 	color: #222222;
 	font-family:'ArvoRegular', serif;
 	font-size: 16px;
@@ -102,13 +48,14 @@ article {
 	text-align: justify;
 }
 
-article section {
-	margin: 10px 0;
-	text-indent: 4em;
-	clear: both;
+#article div.comment {
+    position: absolute;
+    left: 2px;
+    border: 1px solid #ddeedd;
+    background-color: #ddeedd;
 }
 
-article aside {
+#article > section aside {
 	background-color: #FFFFFF;
 	border-radius: 1em;
 	margin: 1em;
@@ -117,17 +64,39 @@ article aside {
 	float: right;
 }
 
-article aside header {
+#article > section aside header {
 	font-style: italic;
 }
 
-article section.selected {
-	border: solid 1px #6CC2FF;
-	border-radius: 1em;
-	padding: 0.5em;
-	background-color: #D9EFFE;
+#nav {
+    z-index: 3;
 }
 
+#nav > div {
+    padding-top: 5px;
+	text-align: center;
+}
+
+#nav > :active,
+#nav > :hover {
+    background-color: #ddeedd;
+}
+
+#nav .tools { background-color: #6666AA; }
+#nav .tools:hover,
+#nav .tools.active { background-color: #9999FF; }
+
+#nav .comments { background-color: #88AA22; }
+#nav .comments:hover,
+#nav .comments.active { background-color: #CCFF33; }
+
+#nav .dictionary { background-color: #AA6644; }
+#nav .dictionary:hover,
+#nav .dictionary.active { background-color: #FF9966; }
+
+#nav .library { background-color: #44AAAA; }
+#nav .library:hover,
+#nav .library.active { background-color: #66FFFF; }
 
 /* FONTS */
 
@@ -176,5 +145,51 @@ article section.selected {
 	     url('fonts/arvo/Arvo-BoldItalic-webfont.svg#webfontThKCEgOx') format('svg');
 	font-weight: normal;
 	font-style: normal;
+}
 
+#wrapper {
+    width: 600px;
+    height: 600px;
+}
+
+#header {
+	width: 595px;
+	height: 20px;
+	top: 0px;
+	left: 0px;
+}
+
+#nav {
+	width: 20px;
+	height: 580px;
+	bottom: 0px;
+	left: 0px;
+}
+
+#nav > div {
+    height: 167px;
+    width: 20px;
+}
+
+#pane {
+	width: 140px;
+	height: 580px;
+	top: 20px;
+	left: -140px;
+}
+
+#article_scroll {
+	width: 580px;
+	height: 580px;
+	top: 20px;
+	right: 0px;
+}
+
+#article {
+    padding-left: 155px;
+}
+
+#article div.comment {
+    width: 145px;
+    padding: 2px;
 }

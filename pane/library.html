@@ -1,0 +1,28 @@
+<h2>Library</h2>
+<h3>Recently Read</h3>
+<ul>
+    <li><a href="moby_dick.txt">Moby Dick</a></li>
+    <li><a href="#23966">The Song my Paddle Sings</a></li>
+    <li><a href="#27827">The Kama Stura of Vatsyayana</a></li>
+    <li><a href="#76">Adventures of Huckleberry Finn</a></li>
+    <li><a href="#1661">The Adventures of Sherlock Holmes</a></li>
+    <li><a href="#1342">Pride and Prejudice</a></li>
+    <li><a href="#30601">How to Analyze People on Sight</a></li>
+</ul>
+<h3>Recommended</h3>
+<ul>
+    <li><a href="#11">Alice's Adventures in Wonderland</a></li>
+    <li><a href="#174">The Picture of Dorian Gray</a></li>
+    <li><a href="#132">The Art of War</a></li>
+    <li><a href="#5000">The Notebooks of Leonardo Da Vinci</a></li>
+</ul>
+
+<script type="text/javascript">
+$(function() {
+    var mt = $.margin_tonic;
+    mt.pane.find('a').click(function() {
+        mt.article.load($(this).attr('href'));
+        return false;
+    });
+});
+</script>

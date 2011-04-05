@@ -1,0 +1,20 @@
+<h2>Dictionary</h2>
+<input type="text" />
+<div class="scrollable"><div class="article"></div></div>
+
+<script type="text/javascript">
+$(function() {
+    var mt = $.margin_tonic;
+    mt.pane.iscroll = mt.pane.find('.scrollable').iscroll({bounce:false});
+    mt.pane.find(':text').change(function(){
+        $.get('dictionary/'+mt.pane.find(':text').val(),
+        function(data) {
+            mt.pane.find('.article').empty().append($(data).find('ul.std, .spell'));
+            setTimeout(function() {
+                console.log(mt.pane.iscroll);
+                mt.pane.iscroll.refresh();
+            }, 200);
+        });
+    });
+});
+</script>

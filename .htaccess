@@ -1,3 +1,10 @@
 Options +FollowSymlinks
 RewriteEngine On
+<<<<<<< HEAD
 RewriteRule ^dictionary/([^/]+)/?$ dictionary.php?q=$1 [NC]
+=======
+
+RewriteRule ^dictionary/([^/]+)/?$ dictionary.php?q=$1 [L,NC]
+
+RewriteRule ^pane/([^.]+)/?$ pane/$1.html [L,NC]
+>>>>>>> 961c324ce70887de6fed7e4e8b80e2f164cd5542
