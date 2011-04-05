@@ -9,7 +9,7 @@ function MarginTonic (options) {
     var _this = this;
     
     _this.options = {
-        filename: 'boo.txt',
+        filename: 'boo.mtbook',
         article: '#article',
         nav: '#nav',
         pane: '#pane',
@@ -124,7 +124,7 @@ MarginTonic.prototype = {
         var filetype = filename.split('.').pop().toLowerCase(); // regex would be faster but this is cleaner
         switch (filetype) {
         case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
-        case 'mtbook': return $(text);
+        case 'mtbook': return '<div>'+text+'</div>';
         }
         return text;
     },

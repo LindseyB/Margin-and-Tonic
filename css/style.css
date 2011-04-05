@@ -20,9 +20,20 @@ html, body {
     position: absolute;
 }
 
-#article_scroll #article pre {
+#article_scroll #article pre,
+#article_scroll #article div {
 	font-family: 'ArvoRegular', serif;
 	margin-left: 10px;
+}
+
+#article_scroll #article div {
+    line-height: 26px;
+}
+
+#article_scroll #article div p,
+#article_scroll #article div h1,
+#article_scroll #article div h2 {
+    padding-bottom: 16px;
 }
 
 #header {
