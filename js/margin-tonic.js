@@ -15,7 +15,7 @@ function MarginTonic (options) {
         pane: '#pane',
         header: '#header',
         spinner: '#spinner',
-        panes: ['tools','comments','dictionary','library']
+        panes: ['tools','dictionary','library']
     };
     
     for (i in options) {
@@ -33,17 +33,35 @@ function MarginTonic (options) {
     // Create tabs and panes, load pane contents
     for (var i in _this.options.panes) {
         var pane = _this.options.panes[i];
-        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt=""/><img src="images/'+pane+'_text_black.png" alt="'+pane+'"/></div>'));
+        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt="'+pane+'"/><img src="images/'+pane+'_text_black.png" alt="'+pane+'"/></div>').data({name:pane}));
     }
 
     // Nav Actions
     _this.nav.children().click(function() {
-        if ($(this).hasClass('active')) return;
-        _this.pane.hide().slideDown();
-        _this.nav.children().removeClass('active');
-        _this.pane.load('pane/'+$(this).attr('class'));
+        var name = $(this).data('name');
+            
+        if (_this.nav.current == name) {
+            console.log('hiding');
+            _this.pane.animate({left:-_this.pane.width()});
+            _this.nav.current = null;
+            $(this).removeClass('active');
+            return;
+        }
+        
+        $(this).siblings().removeClass('active');
         $(this).addClass('active');
+        
+        _this.pane.animate({left:-_this.pane.width()}, function() {
+            _this.pane.load('pane/'+name, function() {
+                _this.pane.animate({left:_this.nav.width()},function() {
+                });
+            });
+        });
+        
+        _this.nav.current = name;
     });
+    
+    $(window).resize();
 };
 
 MarginTonic.prototype = {
@@ -74,6 +92,14 @@ MarginTonic.prototype = {
         _this.busy(true);
         $.get(_this.options.filename, function(data) {
             _this.article.html(_this.prepare(_this.options.filename,data));
+            // ajax get comments
+            var comments = [
+                ["Boo","I like this part. It\'s like a scary story.",63.625],
+                ["Boo","I don\'t like this part. I would come back.",86.9]
+            ];
+            for (var i in comments) {
+                _this.article.append('<div class="comment" style="top:'+comments[i][2]+'%"><b>'+comments[i][0]+'</b><p>'+comments[i][1]+'</p></div>');
+            }
             _this.busy(false);
         }, 'html');
     }

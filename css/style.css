@@ -8,15 +8,16 @@ html * {
 html, body {
 	height: 100%;
 	width: 100%;
+    overflow: hidden;
 }
 
 #wrapper {
-	position: relative;
+    position: relative;
+    overflow: hidden;
 }
 
-#wrapper > div {
-	position: absolute;
-	overflow: hidden;
+#pane, #article_scroll, #nav {
+    position: absolute;
 }
 
 #header {
@@ -27,12 +28,17 @@ html, body {
 }
 
 #pane {
-	border-right: 2px solid #77886E;
 	padding: 5px;
 	background-color: #ddeedd;
+    z-index: 2;
+}
+
+#article_scroll {
+    z-index: 1;
 }
 
 #article {
+    position:relative;
 	padding: 5px;
 	background-color: #efefef;
 	color: #222222;
@@ -40,6 +46,13 @@ html, body {
 	font-size: 16px;
 	line-height: 22px;
 	text-align: justify;
+}
+
+#article div.comment {
+    position: absolute;
+    left: 2px;
+    border: 1px solid #ddeedd;
+    background-color: #ddeedd;
 }
 
 #article > section aside {
@@ -55,11 +68,18 @@ html, body {
 	font-style: italic;
 }
 
-#nav div {
-	padding-top: 5px;
-	width: 20px;
-	height: 25%;
+#nav {
+    z-index: 3;
+}
+
+#nav > div {
+    padding-top: 5px;
 	text-align: center;
+}
+
+#nav > :active,
+#nav > :hover {
+    background-color: #ddeedd;
 }
 
 #nav .tools { background-color: #6666AA; }
@@ -125,12 +145,11 @@ html, body {
 	     url('fonts/arvo/Arvo-BoldItalic-webfont.svg#webfontThKCEgOx') format('svg');
 	font-weight: normal;
 	font-style: normal;
-
 }
 
 #wrapper {
-	height: 600px;
-	width: 600px;
+    width: 600px;
+    height: 600px;
 }
 
 #header {
@@ -142,21 +161,35 @@ html, body {
 
 #nav {
 	width: 20px;
-	height: 476px;
-	top: 20px;
+	height: 580px;
+	bottom: 0px;
 	left: 0px;
 }
 
+#nav > div {
+    height: 167px;
+    width: 20px;
+}
+
 #pane {
-	width: 187px;
-	height: 470px;
+	width: 140px;
+	height: 580px;
 	top: 20px;
-	left: 20px;
+	left: -140px;
 }
 
 #article_scroll {
-	width: 380px;
-	height: 480px;
+	width: 580px;
+	height: 580px;
 	top: 20px;
 	right: 0px;
+}
+
+#article {
+    padding-left: 155px;
+}
+
+#article div.comment {
+    width: 145px;
+    padding: 2px;
 }
