@@ -30,28 +30,39 @@ function MarginTonic (options) {
     
     _this.article_iscroll = new iScroll(_this.article.parent().get(0),{
         bounce:false,
-        dblclick:function() {
-        
-            function getSelected() {
-                if(window.getSelection) { return window.getSelection().toString(); }
-                else if(document.getSelection) { return document.getSelection().toString(); }
-                else {
-                    var selection = document.selection && document.selection.createRange();
-                    if(selection.text) { return selection.text; }
-                }
-                return "";
-            }
-
-            function clearSelection() {
-                if (window.getSelection) {
-                   window.getSelection().removeAllRanges();
-                } else if (document.selection) {
-                   document.selection.empty();
-                }
+        longpresstime:500,
+        longpress:function(e) {
+            var x,y,word,pos,size,
+                o = e.target || e.srcElement;
+            
+            if (o.id == _this.article[0].id) {
+                return false;
             }
         
-            _this.dictword = getSelected();
-            clearSelection();
+            x = (e.pageX || e.clientX) - _this.article.parent().position().left;
+            y = (e.pageY || e.clientY) - _this.article_iscroll.y - _this.article.parent().position().top;
+            
+            var contents = $(o).contents().filter(function(){return this.nodeType==Node.TEXT_NODE;});
+            
+            if (contents.length==1 && !(/\W/.test(contents[0].nodeValue))) {
+                word = contents[0].nodeValue.trim();
+            }
+            else {
+                contents.each(function(i,el) {
+                    $(el).replaceWith($(el.nodeValue.replace(/(\W*)([\w-]+)(\W*)/g,'$1<span>$2</span>$3')));
+                });
+                console.log($(o).children());
+                $(o).children().each(function(i,w) {
+                    pos = $(w).position();
+                    if (pos.left <= x && x <= pos.left + $(w).width() && pos.top <= y && y <= pos.top + $(w).height()) {
+                        word = $(w).text().trim();
+                    }
+                });
+            }
+            
+            if (!word) return false;
+        
+            _this.dictword = word;
             
             _this.nav.find(".active").click();
             _this.nav.find(".dictionary").click();
