@@ -12,16 +12,17 @@
         <script type="text/javascript" src="js/margin-tonic.js"></script>
         <script type="text/javascript">
         $(function() {
+            /*
             $.colorbox({
                 href:'login.html',
                 overlayClose:false,
                 open:true,
                 escKey:false,
-                close:false,
                 onLoad: function() {
                     $('#cboxClose').remove();
                 }
             });
+            */
         
             $(window).resize(function() {
                 var width = $(window).width(),
@@ -34,7 +35,7 @@
                 $("#article_scroll").width(width-20).height(height-20);
             }).resize();
         
-            $.margin_tonic = new MarginTonic();
+            $.margin_tonic = new MarginTonic({filename:'/via/http://www.gutenberg.org/dirs/etext99/advsh12h.htm'});
             $.margin_tonic.busy(false);
             $.margin_tonic.loadBook();
             

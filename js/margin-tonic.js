@@ -135,6 +135,8 @@ MarginTonic.prototype = {
         var filetype = filename.split('.').pop().toLowerCase(); // regex would be faster but this is cleaner
         switch (filetype) {
         case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
+        case 'htm':
+        case 'html': return '<div>'+text+'</div>';
         case 'mtbook': return '<div>'+text+'</div>';
         }
         return text;
@@ -143,18 +145,40 @@ MarginTonic.prototype = {
     loadBook: function() {
         var _this = this;
         _this.busy(true);
+        
+        var loaded = false;
+        
+        _this.article.empty();
+        $(".comment-flag").remove();
+        
         $.get(_this.options.filename, function(data) {
-            _this.article.html(_this.prepare(_this.options.filename,data));
-            // ajax get comments
-            var comments = [
-                ["Boo","I like this part. It\'s like a scary story.",63.625],
-                ["Boo","I don\'t like this part. I would come back.",86.9]
-            ];
-            for (var i in comments) {
-                _this.article.append('<div class="comment" style="top:'+comments[i][2]+'%"><b>'+comments[i][0]+'</b><p>'+comments[i][1]+'</p></div>');
-            }
-            _this.busy(false);
+            _this.article.append(_this.prepare(_this.options.filename,data));
+            loaded && _this.busy(false);
+            loaded = true;
+            setTimeout(function() {
+                _this.article_iscroll.refresh();
+            }, 100);
         }, 'html');
+        
+        $.get('/api/comments.php?book_id=2', function(cdata) {
+            // ajax get comments
+            for (var i in cdata) {
+                (function() {
+                    var $flag = $('<div class="comment-flag" style="top:'+cdata[i]['y_percent']+'%">-</div>');
+                    var $comment = $('<div class="comment" style="top:'+cdata[i]['y_percent']+'%"><b>'+cdata[i]['user_id']+'</b><p>'+cdata[i]['comment']+'</p></div>')
+                    _this.article.parent().append($flag);
+                    _this.article.append($comment);
+                    $flag.click(function() {
+                        _this.article_iscroll.scrollToElement($comment.get(0),1000);
+                    });
+                })();
+            }
+            loaded && _this.busy(false);
+            loaded = true;
+            setTimeout(function() {
+                _this.article_iscroll.refresh();
+            }, 100);
+        }, 'json');
     }
 };
 

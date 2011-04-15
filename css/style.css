@@ -108,6 +108,11 @@ a {
 	font-style: italic;
 }
 
+#article_scroll .comment-flag {
+    position: absolute;
+    right: 10px;
+}
+
 #nav {
     z-index: 3;
 }
