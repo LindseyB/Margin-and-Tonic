@@ -137,47 +137,39 @@ MarginTonic.prototype = {
         case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
         case 'htm':
         case 'html': return '<div>'+text+'</div>';
-        case 'mtbook': return '<div>'+text+'</div>';
         }
         return text;
     },
     
-    loadBook: function() {
+    loadBook: function(book_id) {
         var _this = this;
         _this.busy(true);
         
         var loaded = false;
         
-        _this.article.empty();
-        $(".comment-flag").remove();
+        $.get("/api/book/"+book_id, function(book) {
         
-        $.get(_this.options.filename, function(data) {
-            _this.article.append(_this.prepare(_this.options.filename,data));
+            _this.article.empty();
+            $(".comment-flag").remove();
+            
+            _this.article.append(_this.prepare(book['url'],book['content']));
+            
+            $.each(book['comments'], function(i,comment) {
+                var $flag = $('<div class="comment-flag" style="top:'+comment['y_percent']+'%">-</div>');
+                var $comment = $('<div class="comment" style="top:'+comment['y_percent']+'%"><b>'+comment['user_id']+'</b><p>'+comment['comment']+'</p></div>')
+                _this.article.parent().append($flag);
+                _this.article.append($comment);
+                $flag.click(function() {
+                    _this.article_iscroll.scrollToElement($comment.get(0),1000);
+                });
+            });
+            
             loaded && _this.busy(false);
             loaded = true;
             setTimeout(function() {
                 _this.article_iscroll.refresh();
             }, 100);
-        }, 'html');
-        
-        $.get('/api/comments.php?book_id=2', function(cdata) {
-            // ajax get comments
-            for (var i in cdata) {
-                (function() {
-                    var $flag = $('<div class="comment-flag" style="top:'+cdata[i]['y_percent']+'%">-</div>');
-                    var $comment = $('<div class="comment" style="top:'+cdata[i]['y_percent']+'%"><b>'+cdata[i]['user_id']+'</b><p>'+cdata[i]['comment']+'</p></div>')
-                    _this.article.parent().append($flag);
-                    _this.article.append($comment);
-                    $flag.click(function() {
-                        _this.article_iscroll.scrollToElement($comment.get(0),1000);
-                    });
-                })();
-            }
-            loaded && _this.busy(false);
-            loaded = true;
-            setTimeout(function() {
-                _this.article_iscroll.refresh();
-            }, 100);
+            
         }, 'json');
     }
 };

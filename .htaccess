@@ -5,5 +5,13 @@ RewriteRule ^dictionary/([^/]+)/?$ dictionary.php?q=$1 [L,NC]
 
 RewriteRule ^pane/([^.]+)/?$ pane/$1.html [L,NC]
 
-RewriteCond %{THE_REQUEST} ^[A-Z]+\ /via/([^?\ ]+)
-RewriteRule ^via/ passthrough.php?url=%1 [L]
+RewriteRule ^api/book/?$ api/book.php [L,NC]
+RewriteRule ^api/book/([0-9a-f]+)/?$ api/book.php?_id=$1 [L,NC]
+
+RewriteRule ^api/books/?$ api/books.php [L,NC]
+
+RewriteRule ^api/comment/?$ api/comment.php [L,NC]
+RewriteRule ^api/comment/([0-9a-f]+)/?$ api/comment.php?_id=$1 [L,NC]
+
+RewriteRule ^api/user/([0-9a-f]+)/comments/?$ api/comments.php?user_id=$1 [L,NC]
+RewriteRule ^api/book/([0-9a-f]+)/comments/?$ api/comments.php?book_id=$1 [L,NC]

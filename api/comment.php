@@ -49,10 +49,10 @@ try {
     break;
     case "GET":
         if (!isset($_GET)) break;
-        $comment_id = $_GET['comment_id'];
+        $_id = $_GET['_id'];
         
         $mongo = new Mongo(MONGO_STRING);
-        $data = $mongo->margintonic->comments->findOne(array('_id' => new MongoId($comment_id)));
+        $data = $mongo->margintonic->comments->findOne(array('_id' => new MongoId($_id)));
         $data['_id'] = "${data['_id']}";
         
         echo json_encode($data);
