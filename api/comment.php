@@ -5,6 +5,22 @@ require_once('../passwords.php');
 /**
  * POST
  * data: {
+ *     user_id,
+ *     book_id,
+ *     y_percent,
+ *     comment
+ * }
+ * returns: redirect to GET
+ */
+
+/**
+ * GET
+ * data: {
+ *     _id
+ * }
+ * returns: {
+ *     _id,
+ *     user_id,
  *     book_id,
  *     y_percent,
  *     comment
@@ -18,10 +34,10 @@ try {
     case "POST":
         if (!isset($_POST)) break;
         $data = array();
+        $data['user_id'] = $_POST['user_id'];
         $data['book_id'] = $_POST['book_id'];
         $data['y_percent'] = $_POST['y_percent'];
         $data['comment'] = $_POST['comment'];
-        $data['user_id'] = $_POST['user_id'];
         
         $mongo = new Mongo(MONGO_STRING);
         $mongo->margintonic->comments->insert($data);
