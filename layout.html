@@ -3,6 +3,7 @@
     <head>
         <title>Margin Tonic: Comments in the margins of your favorite books</title>
         <link type="text/css" href="css/smoothness/jquery-ui-1.8.11.custom.css" rel="Stylesheet" />
+        <link rel="stylesheet" type="text/css" href="css/colorbox.css" />	
         <link rel="stylesheet" type="text/css" href="css/style.css" />	
         <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
@@ -11,6 +12,17 @@
         <script type="text/javascript" src="js/margin-tonic.js"></script>
         <script type="text/javascript">
         $(function() {
+            $.colorbox({
+                href:'login.html',
+                overlayClose:false,
+                open:true,
+                escKey:false,
+                close:false,
+                onLoad: function() {
+                    $('#cboxClose').remove();
+                }
+            });
+        
             $(window).resize(function() {
                 var width = $(window).width(),
                     height = $(window).height();
@@ -25,6 +37,7 @@
             $.margin_tonic = new MarginTonic();
             $.margin_tonic.busy(false);
             $.margin_tonic.loadBook();
+            
         });
         </script>
     </head>
@@ -39,3 +52,4 @@
 </div>
 </body>
 </html>
+
