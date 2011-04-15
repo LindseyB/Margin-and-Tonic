@@ -4,3 +4,6 @@ RewriteEngine On
 RewriteRule ^dictionary/([^/]+)/?$ dictionary.php?q=$1 [L,NC]
 
 RewriteRule ^pane/([^.]+)/?$ pane/$1.html [L,NC]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]+\ /via/([^?\ ]+)
+RewriteRule ^via/ passthrough.php?url=%1 [L]
