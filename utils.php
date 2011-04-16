@@ -7,7 +7,7 @@ function show_book() {
 	fclose($fh);
 
 	$book = "<p>" . $book . "</p>";
-	$book = str_replace("\n", "</p><p>", $book);
+	$book = str_replace("\n\n", "</p><p>", $book);
 	echo $book;
 }
 
