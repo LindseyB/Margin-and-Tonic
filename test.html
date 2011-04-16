@@ -1,242 +1,22 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Test</title>
+	<title>Margin Tonic: Comments in the margins of your favorite books</title>
+	<link type="text/css" href="css/smoothness/jquery-ui-1.8.11.custom.css" rel="Stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/colorbox.css" />	
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-	<style type="text/css" media="screen">
-
-/* ============================================================================================================================
-== 3 COLUMN LAYOUT
-** ============================================================================================================================ */
-
-body {
-	margin:0;
-	padding:0;
-	border:0;			/* This removes the border around the viewport in old versions of IE */
-	width:100%;
-	background:#fff;
-	min-width:600px;		/* Minimum width of layout - remove line if not required */
-					/* The min-width property does not work in old versions of Internet Explorer */
-	font-size:90%;
-}
-a {
-	color:#369;
-}
-a:hover {
-	color:#fff;
-	background:#369;
-	text-decoration:none;
-}
-h1, h2, h3 {
-	margin:.8em 0 .2em 0;
-	padding:0;
-}
-p {
-	margin:.4em 0 .8em 0;
-	padding:0;
-}
-
-/* 'widths' sub menu */
-#layoutdims {
-	clear:both;
-	background:#eee;
-	border-top:4px solid #000;
-	margin:0;
-	padding:6px 15px !important;
-	text-align:right;
-}
-/* column container */
-.colmask {
-	position:relative;	/* This fixes the IE7 overflow hidden bug */
-	clear:both;
-	float:left;
-	width:100%;			/* width of whole page */
-	overflow:hidden;		/* This chops off any overhanging divs */
-}
-/* common column settings */
-.colright,
-.colmid,
-.colleft {
-	float:left;
-	width:100%;			/* width of page */
-	position:relative;
-}
-.col1,
-.col2,
-.col3 {
-	float:left;
-	position:relative;
-	padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
-					only padding top and bottom is included here, make it whatever value you need */
-	overflow:hidden;
-}
-
-/* 3 Column settings */
-.threecol {
-	background:#eee;		/* right column background colour */
-}
-.threecol .colmid {
-	right:5%;			/* width of the right column */
-	background:#fff;		/* center column background colour */
-	background-image: url('images/page.png');
-	background-repeat: repeat-y;
-	background-position: right;	
-}
-
-.threecol .colleft {
-	right:70%;			/* width of the middle column */
-	background:#f4f4f4;	/* left column background colour */
-	background-image: url('images/margin_bg.png');
-}
-
-.threecol .colright {
-	background-image: url('images/page.png');	
-}
-
-.threecol .col1 {
-	width:66%;			/* width of center column content (column width minus padding on either side) */
-	left:102%;			/* 100% plus left padding of center column */
-	font: 20px ArvoRegular, serif;
-	line-height: 30px;
-	text-align: justify;
-}
-.threecol .col2 {
-	width:25%;			/* Width of left column content (column width minus padding on either side) */
-	left:9%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
-}
-.threecol .col3 {
-	position: fixed;
-	top: 0px;
-	width:5%;			/* Width of right column content (column width minus padding on either side) */
-	left:95%;			/* Please make note of the brackets here:
-					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
-}
-
-
-/* ============================================================================================================================
-== BUBBLE WITH AN ISOCELES TRIANGLE
-** ============================================================================================================================ */
-
-/* THE SPEECH BUBBLE
-------------------------------------------------------------------------------------------------------------------------------- */
-
-.triangle-isosceles {
-	position:relative;
-	padding:10px;
-	margin:1em 0 1em;
-	color:#FFF;
-	background:#000; /* default background for browsers without gradient support */
-	float: right;
-	clear: both;
-	font: 17px ArvoRegular, serif;
-}
-
-/* Variant : for right positioned triangle
------------------------------------------- */
-
-.triangle-isosceles.right {
-	margin-right:10px;
-	background:#000;
-	width: 70%;
-}
-
-.triangle-isosceles.small {
-	margin-right: 10px;
-	background: #000;
-	padding: 5px;
-	width: 20px;
-	height: 20px;
-}
-
-
-/* THE TRIANGLE
-------------------------------------------------------------------------------------------------------------------------------- */
-
-/* creates triangle */
-.triangle-isosceles:after {
-	content:"";
-	position:absolute;
-	bottom:-15px; /* value = - border-top-width - border-bottom-width */
-	left:50px; /* controls horizontal position */
-	border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
-	border-style:solid;
-	border-color:#000 transparent;
-    /* reduce the damage in FF3.0 */
-    display:block; 
-    width:0;
-}
-
-/* Variant : right
------------------------------------------- */
-
-.triangle-isosceles.right:after {
-	top:16px; /* controls vertical position */
-	right:-10px; /* value = - border-left-width - border-right-width */
-	bottom:auto;
-    left:auto;
-	border-width:5px 0 5px 10px;
-	border-color:transparent #000;
-}
-
-.triangle-isosceles.small:after {
-	top:10px; /* controls vertical position */
-	right:-10px; /* value = - border-left-width - border-right-width */
-	bottom:auto;
-    left:auto;
-	border-width:5px 0 5px 10px;
-	border-color:transparent #000;
-}
-
-/* FONTS */
-
-@font-face {
-	font-family: 'ArvoRegular';
-	src: url('fonts/arvo/Arvo-Regular-webfont.eot');
-	src: url('fonts/arvo/Arvo-Regular-webfont.eot?iefix') format('eot'),
-	     url('fonts/arvo/Arvo-Regular-webfont.woff') format('woff'),
-	     url('fonts/arvo/Arvo-Regular-webfont.ttf') format('truetype'),
-	     url('fonts/arvo/Arvo-Regular-webfont.svg#webfontau9vOdrl') format('svg');
-	font-weight: normal;
-	font-style: normal;
-
-}
-
-@font-face {
-	font-family: 'ArvoItalic';
-	src: url('fonts/arvo/Arvo-Italic-webfont.eot');
-	src: url('fonts/arvo/Arvo-Italic-webfont.eot?iefix') format('eot'),
-	     url('fonts/arvo/Arvo-Italic-webfont.woff') format('woff'),
-	     url('fonts/arvo/Arvo-Italic-webfont.ttf') format('truetype'),
-	     url('fonts/arvo/Arvo-Italic-webfont.svg#webfontvBl98OZ1') format('svg');
-	font-weight: normal;
-	font-style: normal;
-
-}
-
-@font-face {
-	font-family: 'ArvoBold';
-	src: url('fonts/arvo/Arvo-Bold-webfont.eot');
-	src: url('fonts/arvo/Arvo-Bold-webfont.eot?iefix') format('eot'),
-	     url('fonts/arvo/Arvo-Bold-webfont.woff') format('woff'),
-	     url('fonts/arvo/Arvo-Bold-webfont.ttf') format('truetype'),
-	     url('fonts/arvo/Arvo-Bold-webfont.svg#webfontxi5Flt4Z') format('svg');
-	font-weight: normal;
-	font-style: normal;
-
-}
-
-@font-face {
-	font-family: 'ArvoBoldItalic';
-	src: url('fonts/arvo/Arvo-BoldItalic-webfont.eot');
-	src: url('fonts/arvo/Arvo-BoldItalic-webfont.eot?iefix') format('eot'),
-	     url('fonts/arvo/Arvo-BoldItalic-webfont.woff') format('woff'),
-	     url('fonts/arvo/Arvo-BoldItalic-webfont.ttf') format('truetype'),
-	     url('fonts/arvo/Arvo-BoldItalic-webfont.svg#webfontThKCEgOx') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-	</style>	
+	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery.colorbox-min.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascriupt">
+		window.onscroll = function() {
+		   document.getElementById('nav').style.top =
+		   (window.pageYOffset + window.innerHeight - 696) + 'px';
+		};
+	</script>
 </head>
 <body>
 <div class="colmask threecol">
@@ -268,7 +48,7 @@ p {
 				<p class="triangle-isosceles small">10</p>
 				<!-- Column 2 end -->
 			</div>
-			<div class="col3">
+			<div class="col3" id="nav">
 				<!-- Column 3 start -->
 				<img src="images/tools.png" alt="tools"/><br/>
 				<img src="images/define.png" alt="define"/><br/>
