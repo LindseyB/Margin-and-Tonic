@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Margin Tonic: Comments in the margins of your favorite books</title>
+	<link type="text/css" href="css/smoothness/jquery-ui-1.8.11.custom.css" rel="Stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/colorbox.css" />	
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+	<script type="text/javascript" src="js/jquery.colorbox-min.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+</head>
+<body>
+<?php include_once 'utils.php'; ?>
+<div class="colmask threecol">
+	<div class="colright">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1">
+				<!-- Column 1 start -->
+				<?php show_book(); ?>
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2">
+				<!-- Column 2 start -->
+				<?php show_comments(); ?>
+				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
+				<p class="triangle-isosceles small">10</p>
+				<!-- Column 2 end -->
+			</div>
+			<div class="col3" id="nav">
+				<!-- Column 3 start -->
+				<img src="images/tools.png" alt="tools" id="tools"/><br/>
+				<img src="images/define.png" alt="define" id="define"/><br/>
+				<img src="images/library.png" alt="library" id="library"/>
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+    $("#define").click(function () { 
+      $(this).slideUp(); 
+    });
+</script>
+</body>
+</html>
