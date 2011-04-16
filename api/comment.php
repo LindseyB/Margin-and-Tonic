@@ -42,7 +42,7 @@ try {
         $mongo = new Mongo(MONGO_STRING);
         $mongo->margintonic->comments->insert($data);
         
-        $url = "comment.php?comment_id=${data['_id']}";
+        $url = "/api/comment/${data['_id']}";
         header("location: $url");
         exit();
         

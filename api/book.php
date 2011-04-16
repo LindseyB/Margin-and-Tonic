@@ -44,7 +44,7 @@ try {
         $mongo = new Mongo(MONGO_STRING);
         $mongo->margintonic->books->insert($data);
         
-        $url = "book.php?_id=${data['_id']}";
+        $url = "/api/book/${data['_id']}";
         header("location: $url");
         exit();
         
