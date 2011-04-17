@@ -16,7 +16,7 @@ function MarginTonic (options) {
         header: '#header',
         spinner: '#spinner',
         comment_form: '#comment_form',
-        panes: ['tools','dictionary','library']
+        panes: ['tools','define','library']
     };
     
     for (i in options) {
@@ -43,7 +43,7 @@ function MarginTonic (options) {
     // Create tabs and panes, load pane contents
     for (var i in _this.options.panes) {
         var pane = _this.options.panes[i];
-        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt="'+pane+'"/><img src="images/'+pane+'_text_black.png" alt="'+pane+'"/></div>').data({name:pane}));
+        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt="'+pane+'"/></div>').data({name:pane}));
     }
 
     // Nav Actions

@@ -115,6 +115,7 @@ a {
 
 #nav {
     z-index: 3;
+    float: right;
 }
 
 #nav > div {
@@ -124,24 +125,24 @@ a {
 
 #nav > :active,
 #nav > :hover {
-    background-color: #ddeedd;
+    background-image: url('images/page.png');
 }
 
-#nav .tools { background-color: #8DB6CD; }
+#nav .tools { background-image: url('images/page.png'); }
 #nav .tools:hover,
-#nav .tools.active { background-color: #607B8B; }
+#nav .tools.active { background-image: url('images/page.png'); }
 
-#nav .comments { background-color: #B4CDCD; }
+#nav .comments { background-image: url('images/page.png'); }
 #nav .comments:hover,
-#nav .comments.active { background-color: #7A8B8B; }
+#nav .comments.active { background-image: url('images/page.png'); }
 
-#nav .dictionary { background-color: #B4CDCD; }
+#nav .dictionary { background-image: url('images/page.png'); }
 #nav .dictionary:hover,
-#nav .dictionary.active { background-color: #7A8B8B; }
+#nav .dictionary.active { background-image: url('images/page.png'); }
 
-#nav .library { background-color: #8DB6CD; }
+#nav .library { background-image: url('images/page.png'); }
 #nav .library:hover,
-#nav .library.active { background-color: #607B8B; }
+#nav .library.active { background-image: url('images/page.png'); }
 
 /* FONTS */
 
@@ -205,15 +206,15 @@ a {
 }
 
 #nav {
-	width: 20px;
+	width: 37px;
 	height: 580px;
-	bottom: 0px;
-	left: 0px;
+	background-image: url('images/page.png');
 }
 
 #nav > div {
     height: 167px;
-    width: 20px;
+    width: 37px;
+    background-image: url('images/page.png');
 }
 
 #pane {
