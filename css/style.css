@@ -207,6 +207,9 @@ textarea {
 	background-color: black;
 	color: white;
 	padding: 10px;
+	z-index: 3;
+	width: 30%;
+	position: relative;
 }
 
 .dictionary input {
