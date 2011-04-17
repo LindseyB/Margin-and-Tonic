@@ -54,9 +54,13 @@
 </form>
 </div>
 <script>
-    $("#define").click(function () { 
-      $(".dictionary").show(); 
-    });
+	$("#define").click(function () { 
+		if($(".dictionary").is(":hidden")){
+			$(".dictionary").slideDown("slow");
+		} else {
+			$(".dictionary").hide();
+		}
+	});
 
     $("p").click(function() {
     	//TODO: update form values before displaying
