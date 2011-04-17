@@ -64,8 +64,7 @@
 	});
 
     $("p").click(function() {
-    	//TODO: update form values before displaying
-    	console.log($(this));
+    	alert(findYPos($(this)));
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
@@ -77,6 +76,16 @@
     $(window).scroll( function () {
     	$.colorbox.close();
     });
+
+    function findYPos(obj) {
+    	var ypos = 0;
+
+    	if(obj.offsetParent) {
+    		do {
+    			ypos += obj.offsetTop;
+    		} while (obj = obj.offsetParent);
+    	}
+    }
 
 	/*var pressTimer;
 
