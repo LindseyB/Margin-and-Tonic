@@ -64,9 +64,9 @@
 	});
 
     $("p").click(function() {
-    	var element = $(this).get(0);
-    	alert(findYPos(element));
-    	console.log(element);
+    	//finds ypos in pixels
+    	//var element = $(this).get(0);
+    	//findYPos(element);
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
