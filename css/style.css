@@ -212,8 +212,8 @@ textarea {
 	width: 23%;
 	position: fixed;
 	top: 0;
-	height: 100%;
-	overflow: scroll;
+	max-height: 100%;
+	overflow: auto;
 }
 
 .dictionary input {
