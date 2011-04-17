@@ -218,6 +218,7 @@ textarea {
 
 .dictionary input {
 	width: 80%;
+	margin-bottom: 10px;
 }
 
 .dictionary ul {
