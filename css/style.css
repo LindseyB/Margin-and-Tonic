@@ -185,7 +185,7 @@ p {
 == Colorbox
 ** ============================================================================================================================ */
 
-#comment {
+#comment_form {
 	text-align: center;
 }
 
@@ -195,7 +195,7 @@ textarea {
 	height: 100px;
 }
 
-#comment button {
+#comment_form button {
 	margin: auto;
 }
 
