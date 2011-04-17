@@ -220,6 +220,21 @@ textarea {
 	width: 80%;
 }
 
+.dictionary ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dictionary li {
+	margin-bottom: 10px;
+}
+
+.dictionary a {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+}
 /* ============================================================================================================================
 == Custom Fonts
 ** ============================================================================================================================ */
