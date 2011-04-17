@@ -24,6 +24,9 @@
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->
+				<div class="dictionary">
+					Let's define a word!
+				</div>
 				<?php show_comments(); ?>
 				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
 				<p class="triangle-isosceles small">10</p>
@@ -52,7 +55,7 @@
 </div>
 <script>
     $("#define").click(function () { 
-      $(this).slideUp(); 
+      $(".dictionary").show(); 
     });
 
     $("p").click(function() {
