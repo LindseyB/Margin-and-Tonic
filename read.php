@@ -60,7 +60,8 @@
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
-    		transition: "none"
+    		transition: "none",
+    		opacity: 0.5
     	})
     });
 </script>
