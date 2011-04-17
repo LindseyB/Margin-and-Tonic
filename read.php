@@ -27,10 +27,12 @@
 	<div class="colright">
 	<div class="colmid">
 		<div class="colleft">
-			<div class="col1">
-				<!-- Column 1 start -->
-				<?php show_book(); ?>
-				<!-- Column 1 end -->
+			<div id="col1_scroll" class="scrollable">
+				<div class="col1">
+					<!-- Column 1 start -->
+					<?php show_book(); ?>
+					<!-- Column 1 end -->
+				</div>
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->

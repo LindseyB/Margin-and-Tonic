@@ -10,11 +10,7 @@ function MarginTonic (options) {
     
     _this.options = {
         filename: 'boo.mtbook',
-        article: '#article',
-        nav: '#nav',
-        pane: '#pane',
-        header: '#header',
-        spinner: '#spinner',
+        article: '.col1',
         comment_form: '#comment_form',
         panes: ['tools','define','library']
     };
