@@ -9,4 +9,6 @@ curl_setopt($curl, CURLOPT_URL, "$url?$querystring");
 $result = curl_exec($curl);
 curl_close($curl);
 
+$result = strip_tags($result, "<br><a><li><ul>");
+
 echo $result;
