@@ -11,12 +11,6 @@
 	<script type="text/javascript" src="js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/iscroll.js"></script>
-	<script type="text/javascript" src="js/margin-tonic.js"></script>
-	<script type="text/javascript">
-	$(function() {
-		$.margin_tonic = new MarginTonic();
-	});
-	</script>
 </head>
 <body>
 <?php include_once 'utils.php'; ?>
@@ -27,12 +21,10 @@
 	<div class="colright">
 	<div class="colmid">
 		<div class="colleft">
-			<div id="col1_scroll" class="scrollable">
-				<div class="col1">
-					<!-- Column 1 start -->
-					<?php show_book(); ?>
-					<!-- Column 1 end -->
-				</div>
+			<div class="col1">
+				<!-- Column 1 start -->
+				<?php show_book(); ?>
+				<!-- Column 1 end -->
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->
