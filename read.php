@@ -86,7 +86,7 @@
 	}).mousedown(function(){
 		// Set timeout
 		pressTimer = window.setTimeout(function() { 
-			alert((this).val());
+			alert($(this).val());
 		},1000);
 		return false; 
 	});
