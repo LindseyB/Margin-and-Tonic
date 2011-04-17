@@ -110,7 +110,7 @@ a {
     right: 10px;
 }
 
-nav {
+#nav {
 	float: right;
 	background: url('images/page.png');
 }

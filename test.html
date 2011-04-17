@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<style type="text/css" media="screen">
+
+/* ============================================================================================================================
+== 3 COLUMN LAYOUT
+** ============================================================================================================================ */
+
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#fff;
+	min-width:600px;		/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+}
+a {
+	color:#369;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
+}
+
+/* 'widths' sub menu */
+#layoutdims {
+	clear:both;
+	background:#eee;
+	border-top:4px solid #000;
+	margin:0;
+	padding:6px 15px !important;
+	text-align:right;
+}
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+	float:left;
+	width:100%;			/* width of page */
+	position:relative;
+}
+.col1,
+.col2,
+.col3 {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
+					only padding top and bottom is included here, make it whatever value you need */
+	overflow:hidden;
+}
+
+/* 3 Column settings */
+.threecol {
+	background:#eee;		/* right column background colour */
+}
+.threecol .colmid {
+	right:5%;			/* width of the right column */
+	background:#fff;		/* center column background colour */
+	background-image: url('images/page_gradient.png');
+	background-repeat: repeat-y;
+	background-position: right;	
+}
+
+.threecol .colleft {
+	right:70%;			/* width of the middle column */
+	background:#f4f4f4;	/* left column background colour */
+	background-image: url('images/margin_bg.png');
+}
+
+.threecol .colright {
+	background-image: url('images/page_gradient.png');	
+}
+
+.threecol .col1 {
+	width:66%;			/* width of center column content (column width minus padding on either side) */
+	left:102%;			/* 100% plus left padding of center column */
+}
+.threecol .col2 {
+	width:25%;			/* Width of left column content (column width minus padding on either side) */
+	left:9%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+.threecol .col3 {
+	width:5%;			/* Width of right column content (column width minus padding on either side) */
+	left:79%;			/* Please make note of the brackets here:
+					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+}
+
+
+/* ============================================================================================================================
+== BUBBLE WITH AN ISOCELES TRIANGLE
+** ============================================================================================================================ */
+
+/* THE SPEECH BUBBLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+.triangle-isosceles {
+	position:relative;
+	padding:10px;
+	margin:1em 0 1em;
+	color:#FFF;
+	background:#000; /* default background for browsers without gradient support */
+	float: right;
+	clear: both;
+}
+
+/* Variant : for right positioned triangle
+------------------------------------------ */
+
+.triangle-isosceles.right {
+	margin-right:10px;
+	background:#000;
+	width: 85%;
+}
+
+.triangle-isosceles.small {
+	margin-right: 10px;
+	background: #000;
+	padding: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+
+/* THE TRIANGLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+/* creates triangle */
+.triangle-isosceles:after {
+	content:"";
+	position:absolute;
+	bottom:-15px; /* value = - border-top-width - border-bottom-width */
+	left:50px; /* controls horizontal position */
+	border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
+	border-style:solid;
+	border-color:#000 transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+/* Variant : right
+------------------------------------------ */
+
+.triangle-isosceles.right:after {
+	top:16px; /* controls vertical position */
+	right:-10px; /* value = - border-left-width - border-right-width */
+	bottom:auto;
+    left:auto;
+	border-width:5px 0 5px 10px;
+	border-color:transparent #000;
+}
+
+.triangle-isosceles.small:after {
+	top:10px; /* controls vertical position */
+	right:-10px; /* value = - border-left-width - border-right-width */
+	bottom:auto;
+    left:auto;
+	border-width:5px 0 5px 10px;
+	border-color:transparent #000;
+}
+
+
+	</style>	
+</head>
+<body>
+<div class="colmask threecol">
+	<div class="colright">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1">
+				<!-- Column 1 start -->
+			<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pretium lacinia velit id sagittis. Nullam egestas sagittis dignissim. Phasellus sapien orci, egestas in molestie quis, volutpat malesuada odio. Vestibulum lacinia tristique lacus, non congue enim lacinia eget. Suspendisse cursus, risus ultrices semper sollicitudin, magna felis porttitor odio, et eleifend elit diam nec purus. Ut ut neque vitae tortor malesuada iaculis. Sed justo lacus, tempor et pulvinar vitae, hendrerit id quam. Sed aliquam tellus et turpis rhoncus porttitor. Donec eu placerat sem. Mauris ullamcorper tempus odio, non iaculis mi pretium vel. Donec quis mi est, eget volutpat risus. In at nibh libero, nec pellentesque eros. Aliquam ornare mi ut justo commodo in egestas dolor pellentesque. Pellentesque urna augue, tincidunt rhoncus consectetur in, tristique ut nibh. Nulla sodales scelerisque luctus. Aenean nulla erat, facilisis eu aliquam sed, ultrices sed ligula. Donec viverra tincidunt molestie. Suspendisse venenatis, sapien ut viverra pellentesque, lectus lectus dapibus lacus, luctus gravida ligula quam eget sapien. Fusce mauris nibh, laoreet in aliquet vel, cursus quis nulla.
+			</p>
+			<p>
+			Nulla nec tellus a tellus ultricies adipiscing. Curabitur nec arcu massa, et tincidunt dolor. Donec arcu risus, pretium rhoncus sagittis quis, fermentum in nisi. Integer malesuada adipiscing metus, sit amet placerat tellus rhoncus hendrerit. Praesent turpis metus, pellentesque at faucibus a, consequat vitae ligula. Aenean neque lectus, eleifend ut luctus vitae, dapibus id velit. Duis malesuada diam eget tellus feugiat ultricies eget vel metus. Vivamus vitae mattis nunc. Quisque massa leo, facilisis mollis adipiscing a, tristique non elit. Fusce venenatis feugiat felis ornare pellentesque. Morbi facilisis consequat ligula suscipit blandit. Nam tincidunt turpis ut felis faucibus vel tincidunt metus malesuada. Suspendisse laoreet quam scelerisque nunc vehicula eget condimentum arcu volutpat. Donec ligula tortor, scelerisque in venenatis id, eleifend nec justo. Morbi iaculis metus orci, eleifend viverra odio. Morbi lobortis, nunc id ullamcorper posuere, augue lacus vehicula lacus, sit amet pellentesque diam odio euismod mauris. Sed quam risus, tincidunt sit amet dignissim in, facilisis in ante. Cras lacinia blandit pretium. Nulla quis pharetra neque. Curabitur non posuere tellus.
+			</p>
+			<p>
+			Quisque pretium nulla sit amet sem ullamcorper fermentum. Fusce vehicula pharetra erat, congue dignissim ipsum posuere non. Aliquam et massa quis elit convallis interdum sit amet sit amet elit. Morbi tristique massa eu est ornare egestas. Donec blandit tempor leo volutpat ullamcorper. Duis pellentesque, magna ac porta facilisis, sem urna commodo felis, eu auctor sapien nibh et augue. Praesent vitae metus diam, ut dictum mi. Sed at nunc dui, eget scelerisque mi. Suspendisse potenti. Ut sollicitudin fringilla neque, a lobortis dui lobortis in. Donec sed ligula vitae ante semper vestibulum. Morbi et lectus sapien, ac mollis erat. Mauris ultrices quam purus. Duis tristique tortor ante. Suspendisse potenti. Cras aliquam ullamcorper tortor, tristique congue turpis auctor sit amet.
+			</p>
+			<p>
+			Nullam metus nulla, dignissim id ultricies nec, pretium at urna. Ut vehicula dolor vitae quam ultrices vel ultricies magna scelerisque. Cras tellus augue, tincidunt nec adipiscing ut, tristique a augue. Etiam sed consectetur nunc. Duis vel mi velit, id venenatis tellus. Cras felis dui, iaculis a consectetur quis, aliquet porta est. Morbi ac erat eleifend odio lacinia ultricies. Nam rutrum bibendum facilisis. Etiam scelerisque rhoncus diam, et aliquam justo dignissim a. Nunc eleifend placerat urna. Suspendisse potenti.
+			</p>
+			<p>
+			Sed interdum tellus et lacus volutpat nec varius lacus condimentum. Praesent lacus turpis, hendrerit vel ultrices at, congue ut nibh. Quisque tristique eleifend nulla vitae varius. Nunc non nibh arcu. Vestibulum porta, sem vel vestibulum aliquam, metus ipsum ultrices nisl, id ultrices leo tellus eget magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod dapibus dolor sed viverra. Mauris vehicula lobortis tortor placerat volutpat. Suspendisse semper nunc eget ante scelerisque pharetra. Fusce libero massa, consequat ac tempus ullamcorper, vehicula vitae odio. Sed auctor, odio sed ullamcorper scelerisque, justo quam commodo urna, nec pellentesque nulla nibh et est. Donec consectetur, sem id pharetra elementum, elit ante interdum ipsum, faucibus tristique turpis elit in dui.
+			</p>
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2">
+				<!-- Column 2 start -->
+				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
+				<p class="triangle-isosceles small">10</p>
+				<!-- Column 2 end -->
+			</div>
+			<div class="col3">
+				<!-- Column 3 start -->
+				<img src="images/tools.png" alt="tools"/><br/>
+				<img src="images/define.png" alt="define"/><br/>
+				<img src="images/library.png" alt="library"/>
+				<!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+</body>
+</html>
