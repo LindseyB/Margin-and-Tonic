@@ -13,6 +13,9 @@
 </head>
 <body>
 <?php include_once 'utils.php'; ?>
+<div class="dictionary">
+	<?php include "pane/dictionary.html"; ?>
+</div>
 <div class="colmask threecol">
 	<div class="colright">
 	<div class="colmid">
@@ -24,9 +27,6 @@
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->
-				<div class="dictionary">
-					<?php include "pane/dictionary.html"; ?>
-				</div>
 				<?php show_comments(); ?>
 				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
 				<p class="triangle-isosceles small">10</p>
