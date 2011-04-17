@@ -65,6 +65,7 @@
 
     $("p").click(function() {
     	//TODO: update form values before displaying
+    	console.log($(this));
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
