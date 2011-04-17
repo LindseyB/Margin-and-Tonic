@@ -76,6 +76,21 @@
     $(window).scroll( function () {
     	$.colorbox.close();
     });
+
+	var pressTimer;
+
+	$("p").mouseup(function(){
+		clearTimeout(pressTimer);
+		// Clear timeout
+		return false;
+	}).mousedown(function(){
+		// Set timeout
+		pressTimer = window.setTimeout(function() { 
+			alert("hi.");
+		},1000);
+		return false; 
+	});
+
 </script>
 </body>
 </html>
