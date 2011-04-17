@@ -25,7 +25,7 @@
 			<div class="col2">
 				<!-- Column 2 start -->
 				<div class="dictionary">
-					Let's define a word!
+					<?php include "pane/dictionary.html"; ?>
 				</div>
 				<?php show_comments(); ?>
 				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>

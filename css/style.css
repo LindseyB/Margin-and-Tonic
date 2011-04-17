@@ -205,8 +205,6 @@ textarea {
 .dictionary {
 	display: none;
 	background-color: black;
-	height: 100%;
-	z-index: 3;
 	color: white;
 	padding: 10px;
 }
