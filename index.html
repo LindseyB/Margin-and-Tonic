@@ -10,46 +10,15 @@
         <script type="text/javascript" src="js/jquery.colorbox-min.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script>
         <script type="text/javascript" src="js/iscroll.js"></script>
-        <script type="text/javascript" src="js/margin-tonic.js"></script>
-        <script type="text/javascript">
-        $(function() {
-            /*
-            $.colorbox({
-                href:'login.html',
-                overlayClose:false,
-                open:true,
-                escKey:false,
-                onLoad: function() {
-                    $('#cboxClose').remove();
-                }
-            });
-            */
-        
-            $(window).resize(function() {
-                var width = $(window).width(),
-                    height = $(window).height();
-                $("#wrapper").width(width).height(height);
-                $("#header").width(width-5);
-                $("#nav").height(height-20);
-                $("#nav > div").height((height-20)/3 - 5);
-                $("#pane").height(height-20);
-                $("#article_scroll").width(width-20).height(height-20);
-            }).resize();
-        
-            $.margin_tonic = new MarginTonic();
-            
-            $.margin_tonic.comment_form.find('[name=user_id]').val('1234');
-            $.margin_tonic.busy(false);
-            $.margin_tonic.loadBook("4da89cf6c9dfbeef9e000000");
-            
-        });
-        </script>
     </head>
 <body>
 <div class="wrapper">
-    <div id="pane"></div>
-    <div id="article_scroll" class="scrollable"><div id="article"></div></div>
-    <div id="nav"></div>
+    <article><div class="comments"></div><div class="ebook"></div></article>
+    <nav>
+        <div class="tools"><img src="images/tools.png" alt="tools" /></div>
+        <div class="define"><img src="images/define.png" alt="define" /></div>
+        <div class="library"><img src="images/library.png" alt="library" /></div>
+    </nav>
 </div>
 <!-- colorbox forms -->
 <div style="display:none">

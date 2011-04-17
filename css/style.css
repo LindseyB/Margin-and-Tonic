@@ -113,36 +113,11 @@ a {
     right: 10px;
 }
 
-#nav {
-    z-index: 3;
-    float: right;
+nav {
+	float: right;
+	background: url('images/page.png');
 }
 
-#nav > div {
-    padding-top: 5px;
-	text-align: center;
-}
-
-#nav > :active,
-#nav > :hover {
-    background-image: url('images/page.png');
-}
-
-#nav .tools { background-image: url('images/page.png'); }
-#nav .tools:hover,
-#nav .tools.active { background-image: url('images/page.png'); }
-
-#nav .comments { background-image: url('images/page.png'); }
-#nav .comments:hover,
-#nav .comments.active { background-image: url('images/page.png'); }
-
-#nav .dictionary { background-image: url('images/page.png'); }
-#nav .dictionary:hover,
-#nav .dictionary.active { background-image: url('images/page.png'); }
-
-#nav .library { background-image: url('images/page.png'); }
-#nav .library:hover,
-#nav .library.active { background-image: url('images/page.png'); }
 
 /* FONTS */
 
@@ -205,17 +180,6 @@ a {
 	left: 0px;
 }
 
-#nav {
-	width: 37px;
-	height: 580px;
-	background-image: url('images/page.png');
-}
-
-#nav > div {
-    height: 167px;
-    width: 37px;
-    background-image: url('images/page.png');
-}
 
 #pane {
 	width: 140px;
