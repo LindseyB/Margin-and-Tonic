@@ -9,7 +9,8 @@ curl_setopt($curl, CURLOPT_URL, "$url?$querystring");
 $result = curl_exec($curl);
 curl_close($curl);
 
-// replace the green links with white ones
+// replace the green links with white ones and make them work
 $result = str_replace("#008000", "#FFFFFF", $result);
+$result = str_replace("/url?q=", "", $result);
 
 echo $result;
