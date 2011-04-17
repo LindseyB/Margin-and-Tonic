@@ -1,6 +1,7 @@
 <?php
 function show_book() {
 	//TODO: have this grab the book to show from some var
+	// get /api/book/{book_id}
 	$bookFile = "moby_dick.txt";
 	$fh = fopen($bookFile, 'r');
 	$book = fread($fh, filesize($bookFile));

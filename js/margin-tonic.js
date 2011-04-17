@@ -40,15 +40,6 @@ function MarginTonic (options) {
         _this.article_iscroll.refresh();
     }, 100);
     
-    // Create tabs and panes, load pane contents
-    for (var i in _this.options.panes) {
-        var pane = _this.options.panes[i];
-        _this.nav.append($('<div class="'+pane+'"><img src="images/'+pane+'.png" alt="'+pane+'"/></div>').data({name:pane}));
-    }
-
-    // Nav Actions
-    _this.nav.children().click(function(){_this._navclick(this)});
-    
     _this.comment_form.ajaxForm(function(comment){
         _this._comment_submit($.parseJSON(comment));
     });
@@ -105,30 +96,6 @@ MarginTonic.prototype = {
         return false;
     },
     
-    _navclick:function(tab) {
-        var _this = this;
-        var name = $(tab).data('name');
-        
-        if (_this.nav.current == name) {
-            _this.pane.animate({left:-_this.pane.width()});
-            _this.nav.current = null;
-            $(this).removeClass('active');
-            return;
-        }
-        
-        $(tab).siblings().removeClass('active');
-        $(tab).addClass('active');
-        
-        _this.pane.animate({left:-_this.pane.width()}, function() {
-            _this.pane.load('pane/'+name, function() {
-                _this.pane.animate({left:_this.nav.width()},function() {
-                });
-            });
-        });
-        
-        _this.nav.current = name;
-    },
-    
     _show_comment:function(comment) {
         var _this = this;
         var $flag = $('<div class="comment-flag" style="top:'+comment['y_percent']+'%">-</div>');
@@ -147,54 +114,6 @@ MarginTonic.prototype = {
             _this.article_iscroll.refresh();
         }, 100);
         $.colorbox.close();
-    },
-    
-    _prepare: function(filename, text) {
-        var filetype = filename.split('.').pop().toLowerCase(); // regex would be faster but this is cleaner
-        switch (filetype) {
-        case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
-        case 'htm':
-        case 'html': return '<div>'+text+'</div>';
-        }
-        return text;
-    },
-    
-    // Public
-    busy: function(is_busy) {
-        var _this = this;
-        if (is_busy) {
-            _this.spinner.show();
-        } else {
-            _this.spinner.hide();
-        }
-    },
-    
-    loadBook: function(book_id) {
-        var _this = this;
-        _this.busy(true);
-        
-        var loaded = false;
-        
-        $.get("/api/book/"+book_id, function(book) {
-        
-            _this.article.empty();
-            $(".comment-flag").remove();
-            
-            _this.article.append(_this._prepare(book['url'],book['content']));
-            
-            $.each(book['comments'], function(i,comment) {
-                _this._show_comment(comment);
-            });
-            
-            _this.comment_form.find('[name=book_id]').val(book_id);
-            
-            loaded && _this.busy(false);
-            loaded = true;
-            setTimeout(function() {
-                _this.article_iscroll.refresh();
-            }, 100);
-            
-        }, 'json');
     }
 };
 
