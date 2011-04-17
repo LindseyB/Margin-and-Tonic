@@ -11,7 +11,7 @@ body {
 	min-width:600px;		/* Minimum width of layout - remove line if not required */
 					/* The min-width property does not work in old versions of Internet Explorer */
 	font-size:90%;
-	font: ArvoRegular;
+	font-family: Arial, verdana, sans-serif;
 }
 a {
 	color:#369;
@@ -179,6 +179,12 @@ p {
     left:auto;
 	border-width:5px 0 5px 10px;
 	border-color:transparent #000;
+}
+
+
+textarea {
+	width: 300px;
+	height: 50px;
 }
 
 /* ============================================================================================================================

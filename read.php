@@ -56,7 +56,7 @@
     });
 
     $("p").click(function() {
-    	alert("hi!");
+    	//TODO: update form values before displaying
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
