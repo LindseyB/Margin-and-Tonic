@@ -105,8 +105,10 @@ p {
 	left:9%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
 }
 .threecol .col3 {
+	position: fixed;
+	top: 0px;
 	width:5%;			/* Width of right column content (column width minus padding on either side) */
-	left:79%;			/* Please make note of the brackets here:
+	left:95%;			/* Please make note of the brackets here:
 					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
 }
 
@@ -276,13 +278,5 @@ p {
 	</div>
 	</div>
 </div>
-<script>
-$(window).scroll(function(e){
-  $el = $('.col3');
-  if ($(this).scrollTop() > 200 && $el.css('position') != 'fixed'){
-    $('.col3').css({'position': 'fixed', 'top': '0px'});
-  }
-});
-</script>
 </body>
 </html>
