@@ -71,6 +71,10 @@
     		opacity: 0.5
     	})
     });
+
+    $(window).scroll( function () {
+    	$.colorbox.close();
+    });
 </script>
 </body>
 </html>
