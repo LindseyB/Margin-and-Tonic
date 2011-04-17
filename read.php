@@ -77,7 +77,7 @@
     	$.colorbox.close();
     });
 
-	var pressTimer;
+	/*var pressTimer;
 
 	$("span").mouseup(function(){
 		clearTimeout(pressTimer);
@@ -89,7 +89,7 @@
 			alert($(this).val());
 		},1000);
 		return false; 
-	});
+	});*/
 
 </script>
 </body>

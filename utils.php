@@ -8,12 +8,12 @@ function show_book() {
 	fclose($fh);
 
 	// surround every word with span
-	$book_arr = explode(" ", $book);
+	/*$book_arr = explode(" ", $book);
 	foreach ($book_arr as &$element){
 		$element = "<span>".$element."</span>";
 	}
 	unset($element);
-	$book = implode(" ", $book_arr);
+	$book = implode(" ", $book_arr);*/
 
 
 	// every paragraph is in a <p> tag
