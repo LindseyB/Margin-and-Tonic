@@ -1,11 +1,11 @@
-<h2>Dictionary</h2>
+<h2>Define</h2>
 <input type="text" />
 <div class="scrollable"><div class="article"></div></div>
 
 <script type="text/javascript">
 $(function() {
     var mt = $.margin_tonic;
-    mt.pane_iscroll = new iScroll(mt.pane.find('.scrollable').get(0),{bounce:false});
+    //mt.pane_iscroll = new iScroll(mt.pane.find('.scrollable').get(0),{bounce:false});
     mt.pane.find(':text').change(function(){
         $.get('dictionary/'+mt.pane.find(':text').val(),
         function(data) {
