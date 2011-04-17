@@ -79,7 +79,7 @@
 
 	var pressTimer;
 
-	$("p").mouseup(function(){
+	$("span").mouseup(function(){
 		clearTimeout(pressTimer);
 		// Clear timeout
 		return false;

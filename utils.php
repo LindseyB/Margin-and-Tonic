@@ -7,6 +7,16 @@ function show_book() {
 	$book = fread($fh, filesize($bookFile));
 	fclose($fh);
 
+	// surround every word with span
+	$book_arr = explode(" ", $book);
+	foreach ($book_arr as &$element){
+		$element = "<span>".$element."</span>";
+	}
+	unset($element);
+	$book = implode(" ", $book_arr);
+
+
+	// every paragraph is in a <p> tag
 	$book = "<p>" . $book . "</p>";
 	$book = str_replace("\n\n", "</p><p>", $book);
 	echo $book;
