@@ -87,6 +87,8 @@
     			ypos += obj.offsetTop;
     		} while (obj = obj.offsetParent);
     	}
+
+    	return ypos;
     }
 
 	/*var pressTimer;
