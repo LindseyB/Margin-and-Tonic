@@ -73,21 +73,18 @@ a {
 }
 
 #article {
-    position:relative;
 	padding: 5px;
-	background-color: #efefef;
+	background-color: white;
 	color: #222222;
 	font-family:'ArvoRegular', serif;
 	font-size: 16px;
-	line-height: 22px;
+	line-height: 25px;
 	text-align: justify;
 }
 
 #article div.comment {
     position: absolute;
-    left: 2px;
-    border: 1px solid #ddeedd;
-    background-color: #ddeedd;
+    background-image: url('images/margin_bg.png');
 }
 
 #article div.comment p {
