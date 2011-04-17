@@ -64,7 +64,9 @@
 	});
 
     $("p").click(function() {
-    	alert(findYPos($(this).get(0)));
+    	var element = $(this).get(0);
+    	alert(findYPos(element));
+    	console.log(element);
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
