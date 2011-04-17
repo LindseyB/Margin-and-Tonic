@@ -46,6 +46,7 @@ p {
 	float:left;
 	width:100%;			/* width of whole page */
 	overflow:hidden;		/* This chops off any overhanging divs */
+	z-index: 2;
 }
 /* common column settings */
 .colright,
@@ -209,7 +210,8 @@ textarea {
 	padding: 1%;
 	z-index: 3;
 	width: 23%;
-	position: relative;
+	position: fixed;
+	top: 0;
 }
 
 .dictionary input {
