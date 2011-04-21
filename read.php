@@ -1,3 +1,9 @@
+<?php 
+	if(!isset($_COOKIE['user_name']) && !isset($_GET['oauth_token']) {
+		// get out of here, stalker
+		header('Location: http://something.com/index.php');
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,21 +17,25 @@
 	<script type="text/javascript" src="js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
 	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <body>
 <?php 
 	// handle twitter login here
-	$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET); 
-	$twitterObj->setToken($_GET['oauth_token']);
-	$token = $twitterObj->getAccessToken();
-	$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
-	setcookie('oauth_token', $token->oauth_token);
-	setcookie('oauth_token_secret', $token->oauth_token_secret);
+	if(!isset($_COOKIE['user_name'])){
+		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
+		$twitterObj->setToken($_GET['oauth_token']);
+		
+		$token = $twitterObj->getAccessToken();
+		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
+		setcookie('oauth_token', $token->oauth_token);
+		setcookie('oauth_token_secret', $token->oauth_token_secret);
 	
-	// now get the user information
-	$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
-	$userinfo = $twitterObj->get('/account/verify_credentials.json');
-	setcookie('user_name', $userinfo->screen_name);
+		// now get the user information
+		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
+		$userinfo = $twitterObj->get('/account/verify_credentials.json');
+		setcookie('user_name', $userinfo->screen_name);
+	}
 ?>
 <?php include_once 'utils.php'; ?>
 <div class="dictionary">
@@ -61,9 +71,9 @@
 <!-- colorbox forms -->
 <div style="display:none">
 <form id="comment_form" action="/api/comment" method="post">
-    <input type="hidden" name="user_id" />
+    <input type="hidden" name="user_id" value="<?php echo $_COOKIE['user_name']; ?>"/>
     <input type="hidden" name="book_id" value="2" />
-    <input type="hidden" name="y_percent" value="39.54" />
+    <input type="hidden" name="y_percent" id="y_pos" value="39.54" />
     Comment: <textarea name="comment"></textarea><br />
     <button>Scribble</button>
 </form>
@@ -79,8 +89,8 @@
 
     $("p").click(function() {
     	//finds ypos in pixels
-    	//var element = $(this).get(0);
-    	//findYPos(element);
+    	var element = $(this).get(0);
+		$("#ypos").val(findYPos(element));
     	$.colorbox({
     		inline: true,
     		href: "#comment_form",
