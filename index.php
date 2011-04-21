@@ -108,7 +108,7 @@
 		include "twitter-async/EpiTwitter.php";
 		include "passwords.php";
 
-		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
+		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
 		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => 'http://rarlindseysmash.com/Margin-and-Tonic/read.php'));  
 	?>
    <div id="distance"></div>

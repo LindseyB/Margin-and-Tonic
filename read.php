@@ -38,7 +38,7 @@
 		setcookie('oauth_token_secret', $token->oauth_token_secret);
 	
 		// now get the user information
-		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
+		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
 		$userinfo = $twitterObj->get('/account/verify_credentials.json');
 		setcookie('user_name', $userinfo->screen_name);
 	}
