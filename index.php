@@ -108,13 +108,16 @@
 		include "twitter-async/EpiOAuth.php";
 		include "twitter-async/EpiTwitter.php";
 		include "passwords.php";
+
+		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
+		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => 'http://something.com/read.php'));  
 	?>
    <div id="distance"></div>
    <div id="content">
       <h1>Margin Tonic</h1>
       <h2>comments in the margins of your favorite books</h2>
       <p>
-      	<a href="">Sign in with Twitter.</a>
+      	<a href="<?php echo $authenticateUrl; ?>">Sign in with Twitter.</a>
       </p>
    </div>
 </body>
