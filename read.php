@@ -3,6 +3,12 @@
 		// get out of here, stalker
 		header('Location: http://something.com/index.php');
 	}
+
+	include "twitter-async/EpiCurl.php";
+	include "twitter-async/EpiOAuth.php";
+	include "twitter-async/EpiTwitter.php";
+	include "passwords.php";
+	include "utils.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +43,6 @@
 		setcookie('user_name', $userinfo->screen_name);
 	}
 ?>
-<?php include_once 'utils.php'; ?>
 <div class="dictionary">
 	<?php include "pane/dictionary.html"; ?>
 </div>
