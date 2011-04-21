@@ -24,6 +24,17 @@ function show_book() {
 
 function show_comments() {
 	//TODO: have this show comments based on the logged in user
+
+	//grab all of the current user's friends
+	$friends = $twitterObj->get_statusesFriends();
+	try {
+		foreach($friends as $friend){
+			// just echo them for now
+			echo $friend->screen_name;
+		}
+	} catch (EpiTwitterException $e) {
+		// silently die
+	}
 }
 
 ?>
