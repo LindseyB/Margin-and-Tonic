@@ -109,7 +109,7 @@
 		include "passwords.php";
 
 		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
-		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => 'http://something.com/read.php'));  
+		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => 'http://rarlindseysmash.com/Margin-and-Tonic/read.php'));  
 	?>
    <div id="distance"></div>
    <div id="content">
