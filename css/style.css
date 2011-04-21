@@ -1,149 +1,244 @@
-/* LAYOUT */
+/* ============================================================================================================================
+== 3 COLUMN LAYOUT
+** ============================================================================================================================ */
 
-html * {
-	margin: 0;
-	padding: 0;
+body {
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	background:#fff;
+	min-width:600px;		/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+	font-family: Arial, verdana, sans-serif;
 }
-
-html, body {
-	height: 100%;
-	width: 100%;
-    overflow: hidden;
-}
-
-#wrapper {
-    position: relative;
-    overflow: hidden;
-}
-
-#pane, #article_scroll, #nav {
-    position: absolute;
-}
-
-#article_scroll #article pre,
-#article_scroll #article div {
-	font-family: 'ArvoRegular', serif;
-	margin-left: 10px;
-}
-
-#article_scroll #article div {
-    line-height: 26px;
-}
-
-#article_scroll #article div p,
-#article_scroll #article div h1,
-#article_scroll #article div h2 {
-    padding-bottom: 16px;
-}
-
-#header {
-	padding-right: 5px;
-	background-color: #CCCCCC;
-	text-align: right;
-	font-family: "Arial Black", Helvetica, Arial, freesans, sans-serif;
-}
-
-#pane {
-	padding: 5px;
-	background-color: #ddeedd;
-    z-index: 2;
-    font-family: Helvetica, Arial, freesans, sans-serif;
-    overflow: hidden;
-}
-
-#pane ul li {
-	margin-bottom: 5px;
-}
-
 a {
-	color: #666666;
-	text-decoration: none;
+	color:#369;
+}
+a:hover {
+	color:#fff;
+	background:#369;
+	text-decoration:none;
+}
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
 }
 
-#pane h3 {
-	margin: 10px 0px;
+/* 'widths' sub menu */
+#layoutdims {
+	clear:both;
+	background:#eee;
+	border-top:4px solid #000;
+	margin:0;
+	padding:6px 15px !important;
+	text-align:right;
+}
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+	z-index: 2;
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+	float:left;
+	width:100%;			/* width of page */
+	position:relative;
+}
+.col1,
+.col2,
+.col3 {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
+					only padding top and bottom is included here, make it whatever value you need */
+	overflow:hidden;
 }
 
-#pane input {
-	width: 120px;
+/* 3 Column settings */
+.threecol {
+	background:#eee;		/* right column background colour */
+}
+.threecol .colmid {
+	right:5%;			/* width of the right column */
+	background:#fff;		/* center column background colour */
+	background-image: url('images/page.png');
+	background-repeat: repeat-y;
+	background-position: right;	
 }
 
-#article_scroll {
-    z-index: 1;
+.threecol .colleft {
+	right:70%;			/* width of the middle column */
+	background:#f4f4f4;	/* left column background colour */
+	background-image: url('images/margin_bg.png');
 }
 
-#article {
-    position:relative;
-	padding: 5px;
-	background-color: #efefef;
-	color: #222222;
-	font-family:'ArvoRegular', serif;
-	font-size: 16px;
-	line-height: 22px;
+.threecol .colright {
+	background-image: url('images/page.png');	
+}
+
+.threecol .col1 {
+	width:66%;			/* width of center column content (column width minus padding on either side) */
+	left:102%;			/* 100% plus left padding of center column */
+	font: 20px ArvoRegular, serif;
+	line-height: 30px;
 	text-align: justify;
 }
-
-#article div.comment {
-    position: absolute;
-    left: 2px;
-    border: 1px solid #ddeedd;
-    background-color: #ddeedd;
+.threecol .col2 {
+	width:25%;			/* Width of left column content (column width minus padding on either side) */
+	left:9%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+.threecol .col3 {
+	position: fixed;
+	top: 0px;
+	width:5%;			/* Width of right column content (column width minus padding on either side) */
+	left:95%;			/* Please make note of the brackets here:
+					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
 }
 
-#article div.comment p {
-	margin: 2px;
-	font-size: 12px;
-}
 
-#article > section aside {
-	background-color: #FFFFFF;
-	border-radius: 1em;
-	margin: 1em;
-	padding: 1em;
-	width: 50%;
+/* ============================================================================================================================
+== BUBBLE WITH AN ISOCELES TRIANGLE
+** ============================================================================================================================ */
+
+/* THE SPEECH BUBBLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+.triangle-isosceles {
+	position:relative;
+	padding:10px;
+	margin:1em 0 1em;
+	color:#FFF;
+	background:#000; /* default background for browsers without gradient support */
 	float: right;
+	clear: both;
+	font: 17px ArvoRegular, serif;
 }
 
-#article > section aside header {
-	font-style: italic;
+/* Variant : for right positioned triangle
+------------------------------------------ */
+
+.triangle-isosceles.right {
+	margin-right:10px;
+	background:#000;
+	width: 70%;
 }
 
-#article_scroll .comment-flag {
-    position: absolute;
-    right: 10px;
+.triangle-isosceles.small {
+	margin-right: 10px;
+	background: #000;
+	padding: 5px;
+	width: 20px;
+	height: 20px;
 }
 
-#nav {
-    z-index: 3;
+
+/* THE TRIANGLE
+------------------------------------------------------------------------------------------------------------------------------- */
+
+/* creates triangle */
+.triangle-isosceles:after {
+	content:"";
+	position:absolute;
+	bottom:-15px; /* value = - border-top-width - border-bottom-width */
+	left:50px; /* controls horizontal position */
+	border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
+	border-style:solid;
+	border-color:#000 transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
 }
 
-#nav > div {
-    padding-top: 5px;
+/* Variant : right
+------------------------------------------ */
+
+.triangle-isosceles.right:after {
+	top:16px; /* controls vertical position */
+	right:-10px; /* value = - border-left-width - border-right-width */
+	bottom:auto;
+    left:auto;
+	border-width:5px 0 5px 10px;
+	border-color:transparent #000;
+}
+
+.triangle-isosceles.small:after {
+	top:10px; /* controls vertical position */
+	right:-10px; /* value = - border-left-width - border-right-width */
+	bottom:auto;
+    left:auto;
+	border-width:5px 0 5px 10px;
+	border-color:transparent #000;
+}
+
+/* ============================================================================================================================
+== Colorbox
+** ============================================================================================================================ */
+
+#comment_form {
 	text-align: center;
 }
 
-#nav > :active,
-#nav > :hover {
-    background-color: #ddeedd;
+textarea {
+	font-family: Arial, verdana, sans-serif;
+	width: 300px;
+	height: 100px;
 }
 
-#nav .tools { background-color: #8DB6CD; }
-#nav .tools:hover,
-#nav .tools.active { background-color: #607B8B; }
+#comment_form button {
+	margin: 15px auto;
+}
 
-#nav .comments { background-color: #B4CDCD; }
-#nav .comments:hover,
-#nav .comments.active { background-color: #7A8B8B; }
+/* ============================================================================================================================
+== Dictionary sidebar
+** ============================================================================================================================ */
+.dictionary {
+	display: none;
+	background-color: black;
+	color: white;
+	padding: 1%;
+	z-index: 3;
+	width: 23%;
+	position: fixed;
+	top: 0;
+	max-height: 100%;
+	overflow: auto;
+}
 
-#nav .dictionary { background-color: #B4CDCD; }
-#nav .dictionary:hover,
-#nav .dictionary.active { background-color: #7A8B8B; }
+.dictionary input {
+	width: 80%;
+	margin-bottom: 10px;
+}
 
-#nav .library { background-color: #8DB6CD; }
-#nav .library:hover,
-#nav .library.active { background-color: #607B8B; }
+.dictionary ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
 
-/* FONTS */
+.dictionary li {
+	margin-bottom: 10px;
+}
+
+.dictionary a {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+}
+/* ============================================================================================================================
+== Custom Fonts
+** ============================================================================================================================ */
 
 @font-face {
 	font-family: 'ArvoRegular';
@@ -190,51 +285,4 @@ a {
 	     url('fonts/arvo/Arvo-BoldItalic-webfont.svg#webfontThKCEgOx') format('svg');
 	font-weight: normal;
 	font-style: normal;
-}
-
-#wrapper {
-    width: 600px;
-    height: 600px;
-}
-
-#header {
-	width: 595px;
-	height: 20px;
-	top: 0px;
-	left: 0px;
-}
-
-#nav {
-	width: 20px;
-	height: 580px;
-	bottom: 0px;
-	left: 0px;
-}
-
-#nav > div {
-    height: 167px;
-    width: 20px;
-}
-
-#pane {
-	width: 140px;
-	height: 580px;
-	top: 20px;
-	left: -140px;
-}
-
-#article_scroll {
-	width: 580px;
-	height: 580px;
-	top: 20px;
-	right: 0px;
-}
-
-#article {
-    padding-left: 155px;
-}
-
-#article div.comment {
-    width: 145px;
-    padding: 2px;
 }

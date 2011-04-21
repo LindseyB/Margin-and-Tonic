@@ -1,24 +1,26 @@
-<h2>Dictionary</h2>
-<input type="text" />
+<h2>Define</h2>
+<input type="text" id="dict_search"/>
 <div class="scrollable"><div class="article"></div></div>
 
 <script type="text/javascript">
 $(function() {
-    var mt = $.margin_tonic;
-    mt.pane_iscroll = new iScroll(mt.pane.find('.scrollable').get(0),{bounce:false});
-    mt.pane.find(':text').change(function(){
-        $.get('dictionary/'+mt.pane.find(':text').val(),
+    $("#dict_search").change(function(){
+        $.get('dictionary/'+$("#dict_search").val(),
         function(data) {
-            mt.pane.find('.article').empty().append($(data).find('ul.std, .spell'));
+            $('.article').empty().append($(data).find('ul.std, .spell'));
             setTimeout(function() {
-                mt.pane_iscroll.refresh();
+                //mt.pane_iscroll.refresh();
             }, 200);
         });
     });
     
-    if (mt.dictword) {
+    /*if (mt.dictword) {
         mt.pane.find(':text').val(mt.dictword).change();
         mt.dictword = null;
-    }
+    }*/
+});
+
+$("#dict_search").click(function () { 
+    $("#dict_search").val("");
 });
 </script>
