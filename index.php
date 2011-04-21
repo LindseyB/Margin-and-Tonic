@@ -21,7 +21,6 @@
 	}
 	div#distance { 
 		margin-bottom: -10em;
-		background: red;
 		width: 1px;
 		height: 50%;
 		float: left;
