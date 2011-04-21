@@ -1,5 +1,5 @@
 <?php 
-	if(!isset($_COOKIE['user_name']) && !isset($_GET['oauth_token']) {
+	if(!isset($_COOKIE['user_name']) && !isset($_GET['oauth_token'])) {
 		// get out of here, stalker
 		header('Location: http://something.com/index.php');
 	}
