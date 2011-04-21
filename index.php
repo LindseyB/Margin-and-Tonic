@@ -103,6 +103,12 @@
 	</style>
 </head>
 <body>
+	<?php 
+		include "twitter-async/EpiCurl.php";
+		include "twitter-async/EpiOAuth.php";
+		include "twitter-async/EpiTwitter.php";
+		include "passwords.php";
+	?>
    <div id="distance"></div>
    <div id="content">
       <h1>Margin Tonic</h1>
