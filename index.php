@@ -107,9 +107,10 @@
 		include "twitter-async/EpiOAuth.php";
 		include "twitter-async/EpiTwitter.php";
 		include "passwords.php";
-
+        
+        $callback = preg_replace('/\/[^\/]*$/', '/read.php', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
-		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => 'http://rarlindseysmash.com/Margin-and-Tonic/read.php'));  
+		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => $callback));  
 	?>
    <div id="distance"></div>
    <div id="content">
