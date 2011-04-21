@@ -108,7 +108,7 @@
 		include "twitter-async/EpiTwitter.php";
 		include "passwords.php";
         
-        $callback = preg_replace('/\/[^\/]*$/', '/read.php', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $callback = 'http://' . preg_replace('/\/[^\/]*$/', '/read.php', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
 		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => $callback));  
 	?>
