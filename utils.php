@@ -24,7 +24,7 @@ function show_book() {
 
 function show_comments() {
 	//TODO: have this show comments based on the logged in user
-
+	$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
 	//grab all of the current user's friends
 	$friends = $twitterObj->get_statusesFriends();
 	try {
