@@ -9,8 +9,23 @@
 	include "twitter-async/EpiTwitter.php";
 	include "passwords.php";
 	include "utils.php";
-?>
-<!DOCTYPE html>
+    
+	// handle twitter login here
+	if(!isset($_COOKIE['user_name'])){
+		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
+		$twitterObj->setToken($_GET['oauth_token']);
+		
+		$token = $twitterObj->getAccessToken();
+		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
+		setcookie('oauth_token', $token->oauth_token);
+		setcookie('oauth_token_secret', $token->oauth_token_secret);
+	
+		// now get the user information
+		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
+		$userinfo = $twitterObj->get('/account/verify_credentials.json');
+		setcookie('user_name', $userinfo->screen_name);
+	}
+?><!DOCTYPE html>
 <html>
 <head>
 	<title>Margin Tonic: Comments in the margins of your favorite books</title>
@@ -26,23 +41,6 @@
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <body>
-<?php 
-	// handle twitter login here
-	if(!isset($_COOKIE['user_name'])){
-		$twitterObj = new EpiTwitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
-		$twitterObj->setToken($_GET['oauth_token']);
-		
-		$token = $twitterObj->getAccessToken();
-		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
-		setcookie('oauth_token', $token->oauth_token);
-		setcookie('oauth_token_secret', $token->oauth_token_secret);
-	
-		// now get the user information
-		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
-		$userinfo = $twitterObj->get('/account/verify_credentials.json');
-		setcookie('user_name', $userinfo->screen_name);
-	}
-?>
 <div class="dictionary">
 	<?php include "pane/dictionary.html"; ?>
 </div>

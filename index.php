@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php 
+		include "twitter-async/EpiCurl.php";
+		include "twitter-async/EpiOAuth.php";
+		include "twitter-async/EpiTwitter.php";
+		include "passwords.php";
+        
+        $callback = 'http://' . preg_replace('/\/[^\/]*$/', '/read.php', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
+		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => $callback));  
+?><!DOCTYPE html>
 <html>
 <head>
 	<title>Margin Tonic: Comments in the margins of your favorite books</title>
@@ -102,16 +111,6 @@
 	</style>
 </head>
 <body>
-	<?php 
-		include "twitter-async/EpiCurl.php";
-		include "twitter-async/EpiOAuth.php";
-		include "twitter-async/EpiTwitter.php";
-		include "passwords.php";
-        
-        $callback = 'http://' . preg_replace('/\/[^\/]*$/', '/read.php', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
-		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => $callback));  
-	?>
    <div id="distance"></div>
    <div id="content">
       <h1>Margin Tonic</h1>
