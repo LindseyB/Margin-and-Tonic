@@ -116,13 +116,12 @@ p {
 ------------------------------------------------------------------------------------------------------------------------------- */
 
 .triangle-isosceles {
-	position:relative;
+	position:absolute;
+	right:0;
 	padding:10px;
 	margin:1em 0 1em;
 	color:#FFF;
 	background:#000; /* default background for browsers without gradient support */
-	float: right;
-	clear: both;
 	font: 17px ArvoRegular, serif;
 }
 
@@ -132,7 +131,7 @@ p {
 .triangle-isosceles.right {
 	margin-right:10px;
 	background:#000;
-	width: 70%;
+	width: 17.5%;
 }
 
 .triangle-isosceles.small {

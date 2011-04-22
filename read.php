@@ -1,31 +1,11 @@
 <?php 
-	if(!isset($_COOKIE['user_name']) && !isset($_GET['oauth_token'])) {
+	if(!isset($_COOKIE['user_name'])) {
 		// get out of here, stalker
-	$home = 'http://' . preg_replace('/\/[^\/]*$/', '', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$home = 'http://' . preg_replace('/\/[^\/]*$/', '', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		header("Location: $home");
 	}
 
-	include "twitter-async/EpiCurl.php";
-	include "twitter-async/EpiOAuth.php";
-	include "twitter-async/EpiTwitter.php";
-	include "passwords.php";
 	include "utils.php";
-    
-	// handle twitter login here
-	if(!isset($_COOKIE['user_name'])){
-		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
-		$twitterObj->setToken($_GET['oauth_token']);
-		
-		$token = $twitterObj->getAccessToken();
-		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
-		setcookie('oauth_token', $token->oauth_token);
-		setcookie('oauth_token_secret', $token->oauth_token_secret);
-	
-		// now get the user information
-		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET, $_COOKIE['oauth_token'], $_COOKIE['oauth_token_secret']);
-		$userinfo = $twitterObj->get('/account/verify_credentials.json');
-		setcookie('user_name', $userinfo->screen_name);
-	}
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -35,11 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
 	<script type="text/javascript" src="js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
-	<script type="text/javascript" src="js/iscroll.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <body>
 <div class="dictionary">
@@ -49,6 +26,7 @@
 	<div class="colright">
 	<div class="colmid">
 		<div class="colleft">
+			<p style="top:1%;" class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
 			<div class="col1">
 				<!-- Column 1 start -->
 				<?php show_book(); ?>
@@ -56,8 +34,7 @@
 			</div>
 			<div class="col2">
 				<!-- Column 2 start -->
-				<?php show_comments(); ?>
-				<p class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
+				<?php //show_comments(); ?>
 				<p class="triangle-isosceles small">10</p>
 				<!-- Column 2 end -->
 			</div>
