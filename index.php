@@ -116,7 +116,7 @@
       <h1>Margin Tonic</h1>
       <h2>comments in the margins of your favorite books</h2>
       <p>
-      	<a href="<?php echo $authenticateUrl; ?>">Sign in with Twitter.</a>
+      	<a href="<?=$authenticateUrl?>">Sign in with Twitter.</a>
       </p>
    </div>
 </body>
