@@ -1,10 +1,10 @@
 <?php
 
-include "twitter-async/EpiCurl.php";
-include "twitter-async/EpiOAuth.php";
-include "twitter-async/EpiTwitter.php";
-include "passwords.php";
-include "utils.php";
+require_once "twitter-async/EpiCurl.php";
+require_once "twitter-async/EpiOAuth.php";
+require_once "twitter-async/EpiTwitter.php";
+require_once "passwords.php";
+require_once "utils.php";
 
 // handle twitter login here
 $twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
