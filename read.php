@@ -5,7 +5,7 @@
 		header("Location: $home");
 	}
 
-	include "utils.php";
+	require_once "utils.php";
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +27,7 @@
 	<div class="colmid">
 		<div class="colleft">
 			<p style="top:1%;" class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
+			<p style="top:0.33%;" class="triangle-isosceles small">10</p>
 			<div class="col1">
 				<!-- Column 1 start -->
 				<?php show_book(); ?>

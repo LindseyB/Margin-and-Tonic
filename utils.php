@@ -1,4 +1,10 @@
 <?php
+
+require_once "twitter-async/EpiCurl.php";
+require_once "twitter-async/EpiOAuth.php";
+require_once "twitter-async/EpiTwitter.php";
+require_once "passwords.php";
+
 function show_book() {
 	//TODO: have this grab the book to show from some var
 	// get /api/book/{book_id}
