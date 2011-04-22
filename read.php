@@ -1,7 +1,8 @@
 <?php 
 	if(!isset($_COOKIE['user_name']) && !isset($_GET['oauth_token'])) {
 		// get out of here, stalker
-		header('Location: http://something.com/index.php');
+	$home = 'http://' . preg_replace('/\/[^\/]*$/', '', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		header("Location: $home");
 	}
 
 	include "twitter-async/EpiCurl.php";
@@ -74,7 +75,7 @@
 <!-- colorbox forms -->
 <div style="display:none">
 <form id="comment_form" action="/api/comment" method="post">
-    <input type="hidden" name="user_id" value="<?php echo $_COOKIE['user_name']; ?>"/>
+    <input type="hidden" name="user_id" value="<?=$_COOKIE['user_name']?>"/>
     <input type="hidden" name="book_id" value="2" />
     <input type="hidden" name="y_percent" id="y_pos" value="39.54" />
     Comment: <textarea name="comment"></textarea><br />
