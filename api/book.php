@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../passwords.php');
+require_once('../passwords.php');
 
 /**
  * POST

@@ -6,6 +6,8 @@
 	}
 
 	require_once "utils.php";
+
+	$username = $_COOKIE['user_name'];
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,7 @@
 	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/margin-tonic.js"></script>
 </head>
 <body>
 <div class="dictionary">
@@ -25,42 +28,32 @@
 <div class="colmask threecol">
 	<div class="colright">
 	<div class="colmid">
-		<div class="colleft">
-			<p style="top:1%;" class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
-			<p style="top:0.33%;" class="triangle-isosceles small">10</p>
-			<div class="col1">
-				<!-- Column 1 start -->
-				<?php show_book(); ?>
-				<!-- Column 1 end -->
-			</div>
-			<div class="col2">
-				<!-- Column 2 start -->
-				<?php //show_comments(); ?>
-				<p class="triangle-isosceles small">10</p>
-				<!-- Column 2 end -->
-			</div>
-			<div class="col3" id="nav">
-				<!-- Column 3 start -->
-				<img src="images/tools.png" alt="tools" id="tools"/><br/>
-				<img src="images/define.png" alt="define" id="define"/><br/>
-				<img src="images/library.png" alt="library" id="library"/>
-				<!-- Column 3 end -->
-			</div>
-		</div>
+	<div class="colleft" id="comments">
+		<p style="top:1%;" class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
+		<p style="top:0.33%;" class="triangle-isosceles small">10</p>
+		<div id="article" class="col1"></div>
+		<div class="col2"></div>
+		<div class="col3" id="nav"></div>
+	</div>
 	</div>
 	</div>
 </div>
 <!-- colorbox forms -->
 <div style="display:none">
 <form id="comment_form" action="/api/comment" method="post">
-    <input type="hidden" name="user_id" value="<?=$_COOKIE['user_name']?>"/>
-    <input type="hidden" name="book_id" value="2" />
-    <input type="hidden" name="y_percent" id="y_pos" value="39.54" />
+    <input type="hidden" name="user_id" value="<?=$user_name?>"/>
+    <input type="hidden" name="book_id" />
+    <input type="hidden" name="y_percent" id="y_pos" />
     Comment: <textarea name="comment"></textarea><br />
     <button>Scribble</button>
 </form>
 </div>
 <script>
+	$(function() {
+		$.margin_tonic = new MarginTonic();
+		$.margin_tonic.loadBook("4da89cf6c9dfbeef9e000000");
+	});
+
 	$("#define").click(function () { 
 		if($(".dictionary").is(":hidden")){
 			$(".dictionary").slideDown("slow");
@@ -69,33 +62,33 @@
 		}
 	});
 
-    $("p").click(function() {
-    	//finds ypos in pixels
-    	var element = $(this).get(0);
+	$("p").click(function() {
+		//finds ypos in pixels
+		var element = $(this).get(0);
 		$("#ypos").val(findYPos(element));
-    	$.colorbox({
-    		inline: true,
-    		href: "#comment_form",
-    		transition: "none",
-    		opacity: 0.5
-    	})
-    });
+		$.colorbox({
+			inline: true,
+			href: "#comment_form",
+			transition: "none",
+			opacity: 0.5
+		})
+	});
 
-    $(window).scroll( function () {
-    	$.colorbox.close();
-    });
+	$(window).scroll( function () {
+		$.colorbox.close();
+	});
 
-    function findYPos(obj) {
-    	var ypos = 0;
+	function findYPos(obj) {
+		var ypos = 0;
 
-    	if(obj.offsetParent) {
-    		do {
-    			ypos += obj.offsetTop;
-    		} while (obj = obj.offsetParent);
-    	}
+		if(obj.offsetParent) {
+			do {
+				ypos += obj.offsetTop;
+			} while (obj = obj.offsetParent);
+		}
 
-    	return ypos;
-    }
+		return ypos;
+	}
 
 	/*var pressTimer;
 
