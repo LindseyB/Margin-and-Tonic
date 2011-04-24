@@ -5,9 +5,25 @@
 		header("Location: $home");
 	}
 
+	require_once "passwords.php";
 	require_once "utils.php";
+	
+	if (!isset($_GET['book_id'])) {
+		$book_id = "4da89cf6c9dfbeef9e000000";
+	}
+	else {
+		$book_id = $_GET['book_id'];
+	}
 
-	$username = $_COOKIE['user_name'];
+        $mongo = new Mongo(MONGO_STRING);
+        $book = $mongo->margintonic->books->findOne(array('_id' => new MongoId($book_id)));
+
+        $book_curl = curl_init();
+        curl_setopt($book_curl, CURLOPT_URL, $book['url']);
+
+        $query = array('book_id'=>$book_id);
+        $comments = $mongo->margintonic->comments->find($query);
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +38,18 @@
 	<script type="text/javascript" src="js/margin-tonic.js"></script>
 </head>
 <body>
-<div class="dictionary">
-	<?php include "pane/dictionary.html"; ?>
+<div id="pane">
 </div>
 <div class="colmask threecol">
 	<div class="colright">
 	<div class="colmid">
 	<div class="colleft" id="comments">
-		<p style="top:1%;" class="triangle-isosceles right">The entire appearance is created only with CSS.</p>
-		<p style="top:0.33%;" class="triangle-isosceles small">10</p>
-		<div id="article" class="col1"></div>
+		<div id="article" class="col1"><?curl_exec($book_curl);?></div>
 		<div class="col2"></div>
 		<div class="col3" id="nav"></div>
+<? foreach ($comments as $comment): ?>
+<p class="triangle-isosceles right comment" style="top:<?=$comment['y_percent']?>%"><b><?=$comment['user_id']?></b><?=$comment['comment']?></p>
+<? endforeach; ?>
 	</div>
 	</div>
 	</div>
@@ -41,69 +57,29 @@
 <!-- colorbox forms -->
 <div style="display:none">
 <form id="comment_form" action="/api/comment" method="post">
-    <input type="hidden" name="user_id" value="<?=$user_name?>"/>
-    <input type="hidden" name="book_id" />
+    <input type="hidden" name="book_id" value="<?=$book_id?>" />
     <input type="hidden" name="y_percent" id="y_pos" />
     Comment: <textarea name="comment"></textarea><br />
+    <strong id="strlen">0</strong> / <strong>140</strong><br />
     <button>Scribble</button>
 </form>
 </div>
 <script>
 	$(function() {
 		$.margin_tonic = new MarginTonic();
-		$.margin_tonic.loadBook("4da89cf6c9dfbeef9e000000");
+
+		$('textarea[name=comment]').keyup(function() {
+			$(this).val($(this).val().slice(0,140));
+			$('#strlen').text(this.value.length);
+		});
 	});
 
-	$("#define").click(function () { 
-		if($(".dictionary").is(":hidden")){
-			$(".dictionary").slideDown("slow");
-		} else {
-			$(".dictionary").hide();
-		}
+	$(window).scroll(function() {
+		$.margin_tonic.scroll_colorbox || $.colorbox.close()
 	});
-
-	$("p").click(function() {
-		//finds ypos in pixels
-		var element = $(this).get(0);
-		$("#ypos").val(findYPos(element));
-		$.colorbox({
-			inline: true,
-			href: "#comment_form",
-			transition: "none",
-			opacity: 0.5
-		})
-	});
-
-	$(window).scroll( function () {
-		$.colorbox.close();
-	});
-
-	function findYPos(obj) {
-		var ypos = 0;
-
-		if(obj.offsetParent) {
-			do {
-				ypos += obj.offsetTop;
-			} while (obj = obj.offsetParent);
-		}
-
-		return ypos;
-	}
-
-	/*var pressTimer;
-
-	$("span").mouseup(function(){
-		clearTimeout(pressTimer);
-		// Clear timeout
-		return false;
-	}).mousedown(function(){
-		// Set timeout
-		pressTimer = window.setTimeout(function() { 
-			alert($(this).val());
-		},1000);
-		return false; 
-	});*/
 
 </script>
 </body>
 </html>
+<?php
+curl_close($book_curl);

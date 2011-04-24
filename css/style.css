@@ -123,6 +123,7 @@ p {
 	color:#FFF;
 	background:#000; /* default background for browsers without gradient support */
 	font: 17px ArvoRegular, serif;
+	word-wrap:break-word;
 }
 
 /* Variant : for right positioned triangle
@@ -202,7 +203,7 @@ textarea {
 /* ============================================================================================================================
 == Dictionary sidebar
 ** ============================================================================================================================ */
-.dictionary {
+#pane {
 	display: none;
 	background-color: black;
 	color: white;
@@ -215,25 +216,29 @@ textarea {
 	overflow: auto;
 }
 
-.dictionary input {
+#pane.define input {
 	width: 80%;
 	margin-bottom: 10px;
 }
 
-.dictionary ul {
+#pane.define ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
 }
 
-.dictionary li {
+#pane.define li {
 	margin-bottom: 10px;
 }
 
-.dictionary a {
+#pane.define a {
 	color: white;
 	font-weight: bold;
 	text-decoration: none;
+}
+
+form#ss-form textarea.ss-q-long {
+	display:block;
 }
 /* ============================================================================================================================
 == Custom Fonts

@@ -5,7 +5,6 @@ require_once('../passwords.php');
 /**
  * POST
  * data: {
- *     user_id,
  *     book_id,
  *     y_percent,
  *     comment
@@ -33,8 +32,16 @@ try {
     switch($_SERVER["REQUEST_METHOD"]) {
     case "POST":
         if (!isset($_POST)) break;
+        if (!isset($_COOKIE['user_name'])) {
+            echo json_encode(array('error'=>'Not logged in.'));
+            exit;
+        }
+        if (strlen($_POST['comment']) > 140) {
+            echo json_encode(array('error'=>'Comment too long.'));
+            exit;
+        }
         $data = array();
-        $data['user_id'] = $_POST['user_id'];
+        $data['user_id'] = $_COOKIE['user_name'];
         $data['book_id'] = $_POST['book_id'];
         $data['y_percent'] = $_POST['y_percent'];
         $data['comment'] = $_POST['comment'];

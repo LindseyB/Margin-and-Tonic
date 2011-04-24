@@ -14,7 +14,7 @@ function MarginTonic (options) {
         pane: '#pane',
         comments: '#comments',
         comment_form: '#comment_form',
-        panes: ['tools','define','library']
+        panes: ['feedback','define','library']
     };
     
     for (i in options) {
@@ -35,34 +35,63 @@ function MarginTonic (options) {
 
     // Nav Actions
     _this.nav.children().click(function(){_this._navclick(this)});
-    
+    $("#library").data('colorbox',true);
+    $("#feedback").data('colorbox',true);
+
     _this.comment_form.ajaxForm(function(comment){
         _this._comment_submit($.parseJSON(comment));
+    });
+
+    _this.article.mousedown(function(e) {
+        _this.article_timeout = setTimeout(function(){_this._article_longpress(e)},500);
+        e.stopPropagation();
+    })
+    .mouseup(function(e) {
+        _this.article_timeout && clearTimeout(_this.article_timeout);
+    })
+    .mousemove(function(e) {
+        _this.article_timeout && clearTimeout(_this.article_timeout);
+    });
+
+    _this.comments.mousedown(function(e) {
+        _this.comments_timeout = setTimeout(function(){_this._comments_longpress(e)},500);
+    })
+    .mouseup(function(e) {
+        _this.comments_timeout && clearTimeout(_this.comments_timeout);
+    })
+    .mousemove(function(e) {
+        _this.comments_timeout && clearTimeout(_this.comments_timeout);
     });
 };
 
 MarginTonic.prototype = {
     
     // Private
-    _longpress:function(e) {
+
+    _comments_longpress:function(e) {
+        var _this = this;
+        var x,y,word,pos,size,
+            o = e.target || e.srcElement;
+
+        x = (e.pageX || e.clientX) - _this.comments.parent().position().left;
+        y = (e.pageY || e.clientY) - _this.comments.parent().position().top;
+
+        _this.comment_form.find('textarea').val('');
+        _this.comment_form.find('[name=y_percent]').val(100 * y / _this.comments.height());
+        $.colorbox({
+            inline:true,
+            href:_this.options.comment_form
+        });
+        return false;
+    },
+
+    _article_longpress:function(e) {
         var _this = this;
         var x,y,word,pos,size,
             o = e.target || e.srcElement;
     
-        x = (e.pageX || e.clientX) - _this.article.parent().position().left;
-        y = (e.pageY || e.clientY) - _this.article_iscroll.y - _this.article.parent().position().top;
-        
-        if (o.id == _this.article[0].id) {
-            if (x < parseInt(_this.article.css('padding-left'))) {
-                _this.comment_form.find('textarea').val('');
-                _this.comment_form.find('[name=y_percent]').val(100 * y / _this.article.height());
-                $.colorbox({
-                    inline:true,
-                    href:_this.options.comment_form
-                });
-            }
-            return false;
-        }
+        x = (e.pageX || e.clientX) - _this.article.offset().left;
+        y = (e.pageY || e.clientY) - _this.article.offset().top;
         
         var contents = $(o).contents().filter(function(){return this.nodeType==Node.TEXT_NODE;});
         
@@ -82,40 +111,45 @@ MarginTonic.prototype = {
         }
         
         if (!word) return false;
-    
         _this.dictword = word;
-        
         _this.nav.find(".active").click();
-        _this.nav.find(".dictionary").click();
+        _this.nav.find("#define").click();
         return false;
     },
     
     _navclick:function(tab) {
         var _this = this;
         var name = $(tab).data('name');
-        
-        if (_this.nav.current == name) {
-            _this.pane.animate({left:-_this.pane.width()});
-            _this.nav.current = null;
-            $(this).removeClass('active');
+
+        if ($(tab).data('colorbox')) {
+            var mt = $.margin_tonic;
+            $.colorbox({
+                href:'pane/'+name,
+                onOpen:function(){mt.scroll_colorbox = true;},
+                onClosed:function(){mt.scroll_colorbox = false;}
+            });
             return;
         }
-        
+
         $(tab).siblings().removeClass('active');
-        $(tab).addClass('active');
-        
-        _this.pane.animate({left:-_this.pane.width()}, function() {
-            _this.pane.load('pane/'+name, function() {
-                _this.pane.animate({left:_this.nav.width()},function() {
+        _this.pane.removeClass(_this.nav.current);
+        _this.pane.hide("fast", function() {
+            if (_this.nav.current == name) {
+                _this.nav.current = null;
+                $(tab).removeClass('active');
+            }
+            else {
+                _this.nav.current = name;
+                $(tab).addClass('active');
+                _this.pane.addClass(name);
+                _this.pane.load('pane/'+name, function() {
+                    _this.pane.slideDown("slow");
                 });
-            });
+            }
         });
-        
-        _this.nav.current = name;
     },
     
     _show_comment:function(comment) {
-	console.log(comment);
         var _this = this;
         var $flag = $('<div class="comment-flag" style="top:'+comment['y_percent']+'%">-</div>');
         var $comment = $('<p class="triangle-isosceles right comment" style="top:'+comment['y_percent']+'%"><b>'+comment['user_id']+'</b>'+comment['comment']+'</p>');
@@ -128,35 +162,6 @@ MarginTonic.prototype = {
         _this._show_comment(comment);
         $.colorbox.close();
     },
-    
-    _prepare: function(filename, text) {
-        var filetype = filename.split('.').pop().toLowerCase(); // regex would be faster but this is cleaner
-        switch (filetype) {
-        case 'txt': return '<pre style="white-space:pre-wrap">'+text+'</pre>';
-        case 'htm':
-        case 'html': return '<div>'+text+'</div>';
-        }
-        return text;
-    },
-    
-    // Public
-    loadBook: function(book_id) {
-        var _this = this;
-        
-	$.get("/api/book/"+book_id, function(book) {
-            _this.article.empty();
-            $(".comment-flag").remove();
-            
-            _this.article.append(_this._prepare(book['url'],book['content']));
-            console.log(book['comments'])
-            $.each(book['comments'], function(i,comment) {
-                _this._show_comment(comment);
-            });
-            
-            _this.comment_form.find('[name=book_id]').val(book_id);
-            
-        }, 'json');
-    }
 };
 
 if (typeof exports !== 'undefined') exports.MarginTonic = MarginTonic;
