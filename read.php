@@ -48,7 +48,7 @@
 		<div class="col2"></div>
 		<div class="col3" id="nav"></div>
 <? foreach ($comments as $comment): ?>
-<p class="triangle-isosceles right comment" style="top:<?=$comment['y_percent']?>%"><b><?=$comment['user_id']?></b><?=$comment['comment']?></p>
+<p class="triangle-isosceles right comment" style="top:<?=$comment['y_percent']?>%"><b><?=$comment['user_id']?></b><span><br /><?=$comment['comment']?></span></p>
 <? endforeach; ?>
 	</div>
 	</div>
@@ -72,9 +72,32 @@
 			$(this).val($(this).val().slice(0,140));
 			$('#strlen').text(this.value.length);
 		});
+
+		$('.comment span').hide();
+		$('.comment').click(function() {
+			$('.comment:mt-show').css('z-index',3);
+			$(this).css('z-index',4);
+			$(this).find('span').toggle();
+		});
+	});
+
+	var $window = $(window);
+	$.extend($.expr[':'], {
+		'mt-show':function(a,i,m) {
+			var offset = $(a).offset();
+			var windowTop = $window.scrollTop();
+			return (windowTop <= offset.top && offset.top <= windowTop + $window.height());
+		},
+		'mt-hide':function(a,i,m) {
+			var offset = $(a).offset();
+			var windowTop = $window.scrollTop();
+			return (windowTop <= offset.top && offset.top <= windowTop + $window.height());
+		}
 	});
 
 	$(window).scroll(function() {
+		$('.comment:mt-show').show();
+		$('.comment:not(:mt-show)').hide();
 		$.margin_tonic.scroll_colorbox || $.colorbox.close()
 	});
 
