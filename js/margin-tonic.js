@@ -42,16 +42,16 @@ function MarginTonic (options) {
         _this._comment_submit($.parseJSON(comment));
     });
 
-    _this.article.bind('mousedown touchstart',function(e) {
+    _this.article.bind('mousedown touchstart MozTouchDown',function(e) {
         e.stopPropagation();
         if (e.touches && e.touches.length) e = e.touches[0];
         _this.article_loc = [e.pageX,e.pageY];
         _this.article_timeout = setTimeout(function(){_this._article_longpress(e)},500);
     })
-    .bind('mouseup touchend',function(e) {
+    .bind('mouseup touchend MozTouchUp',function(e) {
         _this.article_timeout && clearTimeout(_this.article_timeout);
     })
-    .bind('mousemove touchmove',function(e) {
+    .bind('mousemove touchmove MozTouchMove',function(e) {
         if (!_this.article_timeout) return true;
         if (e.touches && e.touches.length) e = e.touches[0];
         if (Math.abs(_this.article_loc[0] - e.pageX) < 10)
@@ -60,15 +60,15 @@ function MarginTonic (options) {
         _this.article_timeout = null;
     });
 
-    _this.comments.bind('mousedown touchstart',function(e) {
+    _this.comments.bind('mousedown touchstart MozTouchDown',function(e) {
         if (e.touches && e.touches.length) e = e.touches[0];
         _this.comments_loc = [e.pageX,e.pageY];
         _this.comments_timeout = setTimeout(function(){_this._comments_longpress(e)},500);
     })
-    .bind('mouseup touchend',function(e) {
+    .bind('mouseup touchend MozTouchUp',function(e) {
         _this.comments_timeout && clearTimeout(_this.comments_timeout);
     })
-    .bind('mousemove touchmove',function(e) {
+    .bind('mousemove touchmove MozTouchMove',function(e) {
         if (!_this.comments_timeout) return true;
         if (e.touches && e.touches.length) e = e.touches[0];
         if (Math.abs(_this.comments_loc[0] - e.pageX) < 10) 
