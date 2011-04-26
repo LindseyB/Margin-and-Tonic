@@ -1,13 +1,19 @@
-<?php 
+<?php 	
+		$home = 'http://' . preg_replace('/\/[^\/]*$/', '', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		if(isset($_COOKIE['user_name'])){
+			header("location: $home/read.php");
+		}
+
 		include "twitter-async/EpiCurl.php";
 		include "twitter-async/EpiOAuth.php";
 		include "twitter-async/EpiTwitter.php";
 		include "passwords.php";
         
-		$home = 'http://' . preg_replace('/\/[^\/]*$/', '', $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+
 		$twitterObj = new EpiTwitter(CONSUMER_KEY, CONSUMER_SECRET);
 		$authenticateUrl = $twitterObj->getAuthenticateUrl(null,array('oauth_callback' => "$home/twitter_callback.php"));  
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Margin Tonic: Comments in the margins of your favorite books</title>
