@@ -42,25 +42,39 @@ function MarginTonic (options) {
         _this._comment_submit($.parseJSON(comment));
     });
 
-    _this.article.mousedown(function(e) {
-        _this.article_timeout = setTimeout(function(){_this._article_longpress(e)},500);
+    _this.article.bind('mousedown touchstart',function(e) {
         e.stopPropagation();
+        if (e.touches && e.touches.length) e = e.touches[0];
+        _this.article_loc = [e.pageX,e.pageY];
+        _this.article_timeout = setTimeout(function(){_this._article_longpress(e)},500);
     })
-    .mouseup(function(e) {
+    .bind('mouseup touchend',function(e) {
         _this.article_timeout && clearTimeout(_this.article_timeout);
     })
-    .mousemove(function(e) {
-        _this.article_timeout && clearTimeout(_this.article_timeout);
+    .bind('mousemove touchmove',function(e) {
+        if (!_this.article_timeout) return true;
+        if (e.touches && e.touches.length) e = e.touches[0];
+        if (Math.abs(_this.article_loc[0] - e.pageX) < 10)
+        if (Math.abs(_this.article_loc[1] - e.pageY) < 10) return true;
+        clearTimeout(_this.article_timeout);
+        _this.article_timeout = null;
     });
 
-    _this.comments.mousedown(function(e) {
+    _this.comments.bind('mousedown touchstart',function(e) {
+        if (e.touches && e.touches.length) e = e.touches[0];
+        _this.comments_loc = [e.pageX,e.pageY];
         _this.comments_timeout = setTimeout(function(){_this._comments_longpress(e)},500);
     })
-    .mouseup(function(e) {
+    .bind('mouseup touchend',function(e) {
         _this.comments_timeout && clearTimeout(_this.comments_timeout);
     })
-    .mousemove(function(e) {
-        _this.comments_timeout && clearTimeout(_this.comments_timeout);
+    .bind('mousemove touchmove',function(e) {
+        if (!_this.comments_timeout) return true;
+        if (e.touches && e.touches.length) e = e.touches[0];
+        if (Math.abs(_this.comments_loc[0] - e.pageX) < 10) 
+        if (Math.abs(_this.comments_loc[1] - e.pageY) < 10) return true;
+        clearTimeout(_this.comments_timeout);
+        _this.comments_timeout = null;
     });
 };
 

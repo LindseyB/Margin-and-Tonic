@@ -59,7 +59,7 @@
 <form id="comment_form" action="/api/comment" method="post">
     <input type="hidden" name="book_id" value="<?=$book_id?>" />
     <input type="hidden" name="y_percent" id="y_pos" />
-    Comment: <textarea name="comment"></textarea><br />
+    <textarea name="comment"></textarea><br />
     <strong id="strlen">0</strong> / <strong>140</strong><br />
     <button>Scribble</button>
 </form>

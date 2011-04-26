@@ -190,7 +190,7 @@ p {
 	text-align: center;
 }
 
-textarea {
+#comment_form textarea {
 	font-family: Arial, verdana, sans-serif;
 	width: 300px;
 	height: 100px;
